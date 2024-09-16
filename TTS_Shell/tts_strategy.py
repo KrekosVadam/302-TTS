@@ -14,9 +14,9 @@ class TTSStrategy(ABC):
             Output is returned in the desired format.
     """
     @abstractmethod
-    def generate_audio(self, chunk: str):
+    def generate_speech(self, chunk: str):
         """
-        Generate audio from the given text chunk.
+        Generate speech from the given text chunk.
 
         Args:
             chunk (str): Text to be converted to speech.
