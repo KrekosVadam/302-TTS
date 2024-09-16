@@ -1,5 +1,3 @@
-# interface.py
-
 from TTS_Shell.sentence_chunker import SentenceChunker
 from TTS_Shell.dummy_tts import DummyTTS
 from TTS_Shell.tts_processor import TTSProcessor
