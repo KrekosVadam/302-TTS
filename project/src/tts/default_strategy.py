@@ -1,6 +1,7 @@
 import time
 import numpy as np
-from TTS_Shell.tts_strategy import TTSStrategy
+
+from src.tts.tts_strategy import TTSStrategy
 
 class DefaultStrategy(TTSStrategy):
     """
