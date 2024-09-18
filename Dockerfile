@@ -6,7 +6,8 @@ WORKDIR /project
 
 COPY requirements.txt .
 
-RUN pip install --upgrade pip && 
+RUN rm -rf /var/lib/apt/lists/* \
+    pip install --upgrade pip && \
     pip install -r requirements.txt
 
 COPY . .
