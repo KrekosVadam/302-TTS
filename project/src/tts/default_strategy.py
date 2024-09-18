@@ -7,7 +7,7 @@ class DefaultStrategy(TTSStrategy):
     Default TTS Strategy class implementing the TTSStrategy interface. 
     This allows for a default voice to be used, no voice clone, etc.
 
-    Methods:
+    methods:
         generate_speech(chunk: str):
             Generate speech from a chunk of text. Can be overridden by subclasses 
             for more specific implementations, such as generating male or female voices.
@@ -28,15 +28,3 @@ class DefaultStrategy(TTSStrategy):
         time.sleep(0.5)  # Simulate processing time
 
         return np.random.rand(10000)  # Dummy audio data
-
-class MaleVoiceStrategy(DefaultStrategy):
-    def generate_speech(self, chunk: str):
-        print("Generating male voice.")
-        # Add male voice here
-        return super().generate_speech(chunk)
-
-class FemaleVoiceStrategy(DefaultStrategy):
-    def generate_speech(self, chunk: str):
-        print("Generating female voice.")
-        # Add female voice here
-        return super().generate_speech(chunk)
