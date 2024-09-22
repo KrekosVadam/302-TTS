@@ -8,16 +8,16 @@ class TTSStrategy(ABC):
     param: ABC (Abstract Base Class): Python built-in abstract class base declaration.
     
     methods:
-        generate_audio(chunk: str):
+        synthesize(text: str):
             Abstract method. Takes a chunck of text (string) as input. 
             Output is returned in the desired format.
     """
     @abstractmethod
-    def generate_speech(self, chunk: str):
+    def synthesize(self, text: str):
         """
         Generate speech from the given text chunk.
 
-        param: chunk (str): chunk of text to be converted to speech.
+        param: text (str): chunk of text to be converted to speech.
         
         return: None: Return type depends on concrete method.
         """
