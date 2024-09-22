@@ -1,5 +1,6 @@
 import time
 import numpy as np
+import simpleaudio as sa
 
 from scipy.io.wavfile import write
 
@@ -18,6 +19,7 @@ class TTSManager:
         self.stream_strategy = stream_strategy
         self.tts_strategy = tts_strategy
      
+     # Main process for creating text into speech and playing the speech
     def process(self, text: str, max_words: int):
         audio_chunks = []
         
@@ -28,7 +30,7 @@ class TTSManager:
             
             audio_chunks.append(audio) # audio chunk is added to 
 
-            self.save_audio_chunk(audio, i) # Save each chunk as a .wav file
+            self.play_audio(audio, 0.5) # Play audio through onboard device
 
             chunk_end_time = time.time()
             chunk_total_time = chunk_end_time - chunk_start_time
@@ -40,7 +42,46 @@ class TTSManager:
         else:
             print("No audio chunks were processed.")
     
-    def save_audio_chunk(self, audio_chunk, chunk_index):
-        # Normalize and save audio using scipy
-        audio_chunk_normalized = np.int16(audio_chunk / np.max(np.abs(audio_chunk)) * 32767)  # Normalize audio to 16-bit PCM
-        write(f'generated_chunk_{chunk_index}.wav', 24000, audio_chunk_normalized)  # Save using scipy's write method
+    # Thread creation for playing audio
+    def play_audio(self, audio, delay):
+        """"
+        Creates a thread for audio playback
+
+        Args:
+            audio (): Audio processed by the TTS model readly for playback
+            delay (int): an int used to add artificial delay
+
+        Returns:
+            none
+        """
+
+        thread = threading.Thread(target=self._play_audio_thread, args=(audio, delay))
+        thread.start()
+
+    # Audio logic for playing on onboard sound system
+    def _play_audio_thread(self, audio, delay):
+        """"
+        Plays audio on onboard sound system. 
+
+        Args:
+            audio (): Audio processed by the TTS model readly for playback
+            delay (int): an int used to add artificial delay
+
+        Returns:
+            none
+        """
+
+        # Normalize the audio
+        audio_normalized = np.int16(audio / np.max(np.abs(audio)) * 32767)
+        
+        # Convert the audio to bytes
+        audio_bytes = audio_normalized.tobytes()
+        
+        # Play the audio using simpleaudio
+        play_obj = sa.play_buffer(audio_bytes, 1, 2, 22050)  # Mono, 16-bit PCM, 24kHz sample rate
+        
+        # Wait for playback to finish
+        play_obj.wait_done()
+
+        # Add a delay
+        time.sleep(delay)
