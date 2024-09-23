@@ -1,9 +1,6 @@
-import time
-import numpy as np
-
 from src.tts.tts_strategy import TTSStrategy
 
-class DefaultStrategy(TTSStrategy):
+class MaleDefaultStrategy(TTSStrategy):
     """
     Default TTS Strategy class implementing the TTSStrategy interface. 
     This allows for a default voice to be used, no voice clone, etc.
@@ -23,5 +20,7 @@ class DefaultStrategy(TTSStrategy):
 
         return: 
         """
+        
+        voice = "en_US-ryan-high"
         
         return 
