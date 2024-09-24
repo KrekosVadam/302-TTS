@@ -1,3 +1,5 @@
+from piper.voice import PiperVoice
+
 from src.tts.tts_strategy import TTSStrategy
 
 class MaleDefaultStrategy(TTSStrategy):
@@ -20,7 +22,8 @@ class MaleDefaultStrategy(TTSStrategy):
 
         return: 
         """
-        
-        voice = "en_US-ryan-high"
+
+        voice = PiperVoice.load("en_US-ryan-high")
+        voice.synthesize_stream_raw(text) # This call will have to be updated to stream to the right device
         
         return 
