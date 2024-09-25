@@ -1,4 +1,3 @@
-import time
 import numpy as np
 import simpleaudio as sa
 
@@ -19,28 +18,26 @@ class TTSManager:
         self.stream_strategy = stream_strategy
         self.tts_strategy = tts_strategy
      
-     # Main process for creating text into speech and playing the speech
-    def process(self, text: str, max_words: int):
-        audio_chunks = []
+    # Main process for creating text into speech and playing the speech
+    def process(self, text: str):
+        """"
+        Main function for handling the passing of text to piper model,
+        then passing speech to onboard sound
+
+        Args:
+            text (String): A String of text
+
+        Returns:
+            none
+        """
         
-        for i, chunk in enumerate(self.stream_strategy.stream(text, max_words)):
-            chunk_start_time = time.time()
+        for i, chunk in enumerate(self.stream_strategy.stream(text)):
 
-            audio = self.tts_strategy.generate_audio(chunk) # model inference occurs. (TTS)
-            
-            audio_chunks.append(audio) # audio chunk is added to 
+            # model inference occurs. (TTS)
+            audio = self.tts_strategy.generate_audio(chunk) 
 
-            self.play_audio(audio, 0.5) # Play audio through onboard device
-
-            chunk_end_time = time.time()
-            chunk_total_time = chunk_end_time - chunk_start_time
-            print(f"Time to create and save chunk {i+1} as a .wav file: {chunk_total_time:.2f} seconds")
-        
-        if audio_chunks:
-            final_audio = np.concatenate(audio_chunks)
-            print("All chunks processed and saved as .wav files.")
-        else:
-            print("No audio chunks were processed.")
+            # Play audio through onboard device
+            self.play_audio(audio, 0.5) 
     
     # Thread creation for playing audio
     def play_audio(self, audio, delay):
