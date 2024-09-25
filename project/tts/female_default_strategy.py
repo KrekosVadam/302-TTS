@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from piper.voice import PiperVoice
 
 from src.tts.tts_strategy import TTSStrategy
@@ -13,17 +14,15 @@ class FemaleDefaultStrategy(TTSStrategy):
             for more specific implementations, such as generating male or female voices.
     """
     
-    def synthesize(self, text: str):
+    def synthesize(self, text: str) -> Iterable[bytes]:
         """
         Concrete method for generating default speech for the given text chunk.
 
         param: text (str): A string representing the segment of text to be converted 
                             into speech.
 
-        return: 
+        return: iterable of bytes representing the audio
         """
         
         voice = PiperVoice.load("en_US-lessac-high")
-        voice.synthesize_stream_raw(text) # This call will have to be updated to stream to the right device
-        
-        return 
+        return voice.synthesize_stream_raw(text)
