@@ -1,7 +1,7 @@
 from collections.abc import Iterable
 from piper.voice import PiperVoice
 
-from src.tts.tts_strategy import TTSStrategy
+from tts.tts_strategy import TTSStrategy
 
 class FemaleDefaultStrategy(TTSStrategy):
     """
