@@ -4,7 +4,7 @@ import simpleaudio as sa
 from scipy.io.wavfile import write
 
 from src.stream.stream_strategy import StreamStrategy
-from src.tts.tts_strategy import TTSStrategy
+from tts.tts_strategy import TTSStrategy
 
 class TTSManager:
     """

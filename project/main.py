@@ -9,10 +9,10 @@ if __name__ == "__main__":
 """
 
 import csv
-from ttsmanager import TTSManager
-from tts.defaultstrategy import DefaultStrategy
-from tts.femaledefaultstrategy import FemaleDefaultStrategy
-from tts.maledefaultstrategy import MaleDefaultStrategy
+from tts_manager import TTSManager
+from tts.default_strategy import DefaultStrategy
+from tts.female_default_strategy import FemaleDefaultStrategy
+from tts.male_default_strategy import MaleDefaultStrategy
 
 def read_samples_from_csv(file_path):
     """Read samples from a CSV file and return a list of text chunks."""
