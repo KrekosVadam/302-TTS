@@ -1,56 +1,95 @@
-import csv
-from tts_manager import TTSManager
+import numpy as np
+import simpleaudio as sa
+import threading
+
+from scipy.io.wavfile import write
 from tts.default_strategy import DefaultStrategy
 from tts.female_default_strategy import FemaleDefaultStrategy
 from tts.male_default_strategy import MaleDefaultStrategy
+from tts.tts_strategy import TTSStrategy
 
-def read_samples_from_csv(file_path):
-    """Read samples from a CSV file and return a list of text chunks."""
-    samples = []
-    with open(file_path, newline='', encoding='utf-8') as csvfile:
-        reader = csv.reader(csvfile)
-        for row in reader:
-            if row:
-                samples.append(row[0]) 
-    return samples
+class TTSManager:
+    """
+    Acts as the context class responsible for managing the process of turning Text to Speech.
 
-def main():
-    """Main function to select strategy and process text-to-speech."""
+    param: choice (str): The voice choice for generating audio ('Male', 'Female', 'Default').
+    """
     
-    # Path to the CSV file containing text samples
-    csv_file_path = 'phonetext.csv'
+    def __init__(self, choice: str):
+        """
+        Initializes the TTSManager with the appropriate TTS strategy based on the choice.
 
-    # Read samples from the CSV file
-    samples = read_samples_from_csv(csv_file_path)
+        Args:
+            choice (str): The user's voice choice ('Male', 'Female', 'Default').
+        """
+        if choice == 'Male':
+            self.tts_strategy = MaleDefaultStrategy()
+        elif choice == 'Female':
+            self.tts_strategy = FemaleDefaultStrategy()
+        elif choice == 'Default':
+            self.tts_strategy = DefaultStrategy()
+        else:
+            # If an invalid option is given, default to the general DefaultStrategy
+            self.tts_strategy = DefaultStrategy()
+
+    # Main process for creating text into speech and playing the speech
+    def process(self, text: str):
+        """
+        Main function for handling the passing of text to the TTS model,
+        then passing speech to onboard sound.
+
+        Args:
+            text (str): A string of text.
+
+        Returns:
+            None
+        """
+        # Generate audio for the entire input text
+        audio = self.tts_strategy.generate_audio(text)
+
+        # Play audio through onboard device
+        self.play_audio(audio, 0.5) 
     
-    # Ask the user to choose a TTS strategy
-    print("Choose a TTS strategy:")
-    print("1. Default Strategy")
-    print("2. Female Default Strategy")
-    print("3. Male Default Strategy")
+    # Thread creation for playing audio
+    def play_audio(self, audio, delay):
+        """
+        Creates a thread for audio playback.
 
-    # Get user choice
-    choice = input("Enter the number of your choice (1-3): ")
+        Args:
+            audio (): Audio processed by the TTS model ready for playback.
+            delay (int): An int used to add artificial delay.
 
-    # Determine the strategy based on user input
-    if choice == '1':
-        tts_strategy = DefaultStrategy()
-    elif choice == '2':
-        tts_strategy = FemaleDefaultStrategy()
-    elif choice == '3':
-        tts_strategy = MaleDefaultStrategy()
-    else:
-        print("Invalid choice, defaulting to Default Strategy.")
-        tts_strategy = DefaultStrategy()
+        Returns:
+            None
+        """
+        thread = threading.Thread(target=self._play_audio_thread, args=(audio, delay))
+        thread.start()
 
-    # Initialize the TTS Manager with the chosen strategy
-    tts_manager = TTSManager(tts_strategy=tts_strategy)
+    # Audio logic for playing on onboard sound system
+    def _play_audio_thread(self, audio, delay):
+        """
+        Plays audio on onboard sound system. 
 
-    # Process each text sample
-    for sample in samples:
-        print(f"Processing sample: {sample}")
-        tts_manager.process(sample, max_words=10)  # Adjust max_words as needed
+        Args:
+            audio (): Audio processed by the TTS model ready for playback.
+            delay (int): An int used to add artificial delay.
 
-# Ensure the script runs when executed directly
-if __name__ == "__main__":
-    main()
+        Returns:
+            None
+        """
+
+        # Normalize the audio
+        audio_normalized = np.int16(audio / np.max(np.abs(audio)) * 32767)
+        
+        # Convert the audio to bytes
+        audio_bytes = audio_normalized.tobytes()
+        
+        # Play the audio using simpleaudio
+        play_obj = sa.play_buffer(audio_bytes, 1, 2, 22050)  # Mono, 16-bit PCM, 22.05kHz sample rate
+        
+        # Wait for playback to finish
+        play_obj.wait_done()
+
+        # Add a delay
+        time.sleep(delay)
+
