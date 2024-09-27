@@ -1,43 +1,56 @@
+
 import numpy as np
 import simpleaudio as sa
 
-from scipy.io.wavfile import write
-
-from src.stream.stream_strategy import StreamStrategy
 from tts.tts_strategy import TTSStrategy
+from tts.male_default_strategy import MaleDefaultStrategy
+from tts.female_default_strategy import FemaleDefaultStrategy
+from tts.customestrategy import CustomStrategy
 
 class TTSManager:
     """
     Acts as the context class responsible for managing the process of turning Text to Speech
 
-    param: stream_strategy (StreamStrategy): The strategy for chunking the input text.
     param: tts_strategy (TTSStrategy): The strategy for generating audio from text.
     """
     
-    def __init__(self, stream_strategy: StreamStrategy, tts_strategy: TTSStrategy):
-        self.stream_strategy = stream_strategy
-        self.tts_strategy = tts_strategy
+    def __init__(self):
+        self.tts_strategy = None
      
     # Main process for creating text into speech and playing the speech
-    def process(self, text: str):
+    def process(self, text: str, voice_type: str):
         """"
         Main function for handling the passing of text to piper model,
         then passing speech to onboard sound
 
         Args:
             text (String): A String of text
+            voice_type (String): Voice type to be used for speech synthesis (male, female, custom)
 
         Returns:
             none
         """
-        
-        for i, chunk in enumerate(self.stream_strategy.stream(text)):
+            
+        # Load strategy based on voice type
+        if voice_type == "male":
+            # do male
+            self.tts_strategy = MaleDefaultStrategy()
+        elif voice_type == "female":
+            # do female
+            self.tts_strategy = FemaleDefaultStrategy()
+        elif voice_type == "custom":
+            # do custom
+            self.tts_strategy = CustomStrategy()
+        else:
+            # set default if nothing else chosen
+            self.tts_strategy = MaleDefaultStrategy()
+            
 
-            # model inference occurs. (TTS)
-            audio = self.tts_strategy.generate_audio(chunk) 
-
-            # Play audio through onboard device
-            self.play_audio(audio, 0.5) 
+        # model inference occurs. (TTS) based on voice type given
+        audio = self.tts_strategy.synthesize(text)
+            
+        # Play audio through onboard device
+        self.play_audio(audio, 0.5) 
     
     # Thread creation for playing audio
     def play_audio(self, audio, delay):
