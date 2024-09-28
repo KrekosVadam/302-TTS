@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from female_default_strategy import FemaleDefaultStrategy
+from .female_default_strategy import FemaleDefaultStrategy
 
 class TestFemaleDefaultStrategy(unittest.TestCase):
     
