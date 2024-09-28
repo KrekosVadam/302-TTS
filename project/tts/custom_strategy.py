@@ -1,4 +1,4 @@
-from tts_strategy import TTSStrategy
+from .tts_strategy import TTSStrategy
 
 class CustomStrategy(TTSStrategy):
     """
