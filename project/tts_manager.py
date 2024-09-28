@@ -1,46 +1,97 @@
-import time
+
 import numpy as np
+import simpleaudio as sa
 
-from scipy.io.wavfile import write
-
-from src.stream.stream_strategy import StreamStrategy
-from src.tts.tts_strategy import TTSStrategy
+from project.tts.tts_strategy import TTSStrategy
+from project.tts.male_default_strategy import MaleDefaultStrategy
+from project.tts.female_default_strategy import FemaleDefaultStrategy
+from project.tts.custom_strategy import CustomStrategy
 
 class TTSManager:
     """
     Acts as the context class responsible for managing the process of turning Text to Speech
 
-    param: stream_strategy (StreamStrategy): The strategy for chunking the input text.
     param: tts_strategy (TTSStrategy): The strategy for generating audio from text.
     """
     
-    def __init__(self, stream_strategy: StreamStrategy, tts_strategy: TTSStrategy):
-        self.stream_strategy = stream_strategy
-        self.tts_strategy = tts_strategy
+    def __init__(self):
+        self.tts_strategy = None
      
-    def process(self, text: str, max_words: int):
-        audio_chunks = []
-        
-        for i, chunk in enumerate(self.stream_strategy.stream(text, max_words)):
-            chunk_start_time = time.time()
+    # Main process for creating text into speech and playing the speech
+    def process(self, text: str, voice_type: str):
+        """"
+        Main function for handling the passing of text to piper model,
+        then passing speech to onboard sound
 
-            audio = self.tts_strategy.generate_audio(chunk) # model inference occurs. (TTS)
+        Args:
+            text (String): A String of text
+            voice_type (String): Voice type to be used for speech synthesis (male, female, custom)
+
+        Returns:
+            none
+        """
             
-            audio_chunks.append(audio) # audio chunk is added to 
-
-            self.save_audio_chunk(audio, i) # Save each chunk as a .wav file
-
-            chunk_end_time = time.time()
-            chunk_total_time = chunk_end_time - chunk_start_time
-            print(f"Time to create and save chunk {i+1} as a .wav file: {chunk_total_time:.2f} seconds")
-        
-        if audio_chunks:
-            final_audio = np.concatenate(audio_chunks)
-            print("All chunks processed and saved as .wav files.")
+        # Load strategy based on voice type
+        if voice_type == "male":
+            # do male
+            self.tts_strategy = MaleDefaultStrategy()
+        elif voice_type == "female":
+            # do female
+            self.tts_strategy = FemaleDefaultStrategy()
+        elif voice_type == "custom":
+            # do custom
+            self.tts_strategy = CustomStrategy()
         else:
-            print("No audio chunks were processed.")
+            # set default if nothing else chosen
+            self.tts_strategy = MaleDefaultStrategy()
+            
+
+        # model inference occurs. (TTS) based on voice type given
+        audio = self.tts_strategy.synthesize(text)
+            
+        # Play audio through onboard device
+        self.play_audio(audio, 0.5) 
     
-    def save_audio_chunk(self, audio_chunk, chunk_index):
-        # Normalize and save audio using scipy
-        audio_chunk_normalized = np.int16(audio_chunk / np.max(np.abs(audio_chunk)) * 32767)  # Normalize audio to 16-bit PCM
-        write(f'generated_chunk_{chunk_index}.wav', 24000, audio_chunk_normalized)  # Save using scipy's write method
+    # Thread creation for playing audio
+    def play_audio(self, audio, delay):
+        """"
+        Creates a thread for audio playback
+
+        Args:
+            audio (): Audio processed by the TTS model readly for playback
+            delay (int): an int used to add artificial delay
+
+        Returns:
+            none
+        """
+
+        thread = threading.Thread(target=self._play_audio_thread, args=(audio, delay))
+        thread.start()
+
+    # Audio logic for playing on onboard sound system
+    def _play_audio_thread(self, audio, delay):
+        """"
+        Plays audio on onboard sound system. 
+
+        Args:
+            audio (): Audio processed by the TTS model readly for playback
+            delay (int): an int used to add artificial delay
+
+        Returns:
+            none
+        """
+
+        # Normalize the audio
+        audio_normalized = np.int16(audio / np.max(np.abs(audio)) * 32767)
+        
+        # Convert the audio to bytes
+        audio_bytes = audio_normalized.tobytes()
+        
+        # Play the audio using simpleaudio
+        play_obj = sa.play_buffer(audio_bytes, 1, 2, 22050)  # Mono, 16-bit PCM, 24kHz sample rate
+        
+        # Wait for playback to finish
+        play_obj.wait_done()
+
+        # Add a delay
+        time.sleep(delay)
