@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from .tts_manager import TTSManager  
+from project.tts_manager import TTSManager  
 
 class TestTTSManager(unittest.TestCase):
 
