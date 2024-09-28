@@ -18,4 +18,5 @@ RUN apt-get update && apt-get install -y \
 
 COPY . .
 
-CMD ["python", "project/main.py"]
+# CMD ["python", "project/main.py"]
+CMD ["python", "-m", "unittest", "project.tts.female_default_strategy"]
