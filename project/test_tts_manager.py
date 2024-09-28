@@ -1,13 +1,13 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from project.tts_manager import TTSManager  
+from project.tts_manager import TTSManager
 
 class TestTTSManager(unittest.TestCase):
 
-    @patch('tts_manager.MaleDefaultStrategy')
-    @patch('tts_manager.FemaleDefaultStrategy')
-    @patch('tts_manager.CustomStrategy')
-    @patch('tts_manager.simpleaudio.play_buffer')
+    @patch('project.tts.male_default_strategy.MaleDefaultStrategy')
+    @patch('project.tts.female_default_strategy.FemaleDefaultStrategy')
+    @patch('project.tts.custom_strategy.CustomStrategy')
+    @patch('simpleaudio.play_buffer')
     def test_process_male_voice(self, mock_play_buffer, mock_custom_strategy, mock_female_strategy, mock_male_strategy):
         # Arrange
         tts_manager = TTSManager()
@@ -20,9 +20,9 @@ class TestTTSManager(unittest.TestCase):
         mock_male_strategy.assert_called_once()
         mock_play_buffer.assert_called_once()
 
-    @patch('tts_manager.FemaleDefaultStrategy')
-    @patch('tts_manager.CustomStrategy')
-    @patch('tts_manager.simpleaudio.play_buffer')
+    @patch('project.tts.female_default_strategy.FemaleDefaultStrategy')
+    @patch('project.tts.custom_strategy.CustomStrategy')
+    @patch('simpleaudio.play_buffer')
     def test_process_female_voice(self, mock_play_buffer, mock_custom_strategy, mock_female_strategy):
         # Arrange
         tts_manager = TTSManager()
@@ -35,10 +35,10 @@ class TestTTSManager(unittest.TestCase):
         mock_female_strategy.assert_called_once()
         mock_play_buffer.assert_called_once()
 
-    @patch('tts_manager.MaleDefaultStrategy')
-    @patch('tts_manager.FemaleDefaultStrategy')
-    @patch('tts_manager.CustomStrategy')
-    @patch('tts_manager.simpleaudio.play_buffer')
+    @patch('project.tts.male_default_strategy.MaleDefaultStrategy')
+    @patch('project.tts.female_default_strategy.FemaleDefaultStrategy')
+    @patch('project.tts.custom_strategy.CustomStrategy')
+    @patch('simpleaudio.play_buffer')
     def test_process_custom_voice(self, mock_play_buffer, mock_custom_strategy, mock_female_strategy, mock_male_strategy):
         # Arrange
         tts_manager = TTSManager()
@@ -51,10 +51,10 @@ class TestTTSManager(unittest.TestCase):
         mock_custom_strategy.assert_called_once()
         mock_play_buffer.assert_called_once()
 
-    @patch('tts_manager.MaleDefaultStrategy')
-    @patch('tts_manager.FemaleDefaultStrategy')
-    @patch('tts_manager.CustomStrategy')
-    @patch('tts_manager.simpleaudio.play_buffer')
+    @patch('project.tts.male_default_strategy.MaleDefaultStrategy')
+    @patch('project.tts.female_default_strategy.FemaleDefaultStrategy')
+    @patch('project.tts.custom_strategy.CustomStrategy')
+    @patch('simpleaudio.play_buffer')
     def test_process_default_voice(self, mock_play_buffer, mock_custom_strategy, mock_female_strategy, mock_male_strategy):
         # Arrange
         tts_manager = TTSManager()
@@ -68,4 +68,4 @@ class TestTTSManager(unittest.TestCase):
         mock_play_buffer.assert_called_once()
 
 if __name__ == '__main__':
-    unittest.main() 
+    unittest.main()
