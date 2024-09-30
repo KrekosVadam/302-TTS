@@ -47,4 +47,4 @@ class TTSManager:
             
 
         # model inference occurs. (TTS) based on voice type given
-        audio = self.tts_strategy.synthesize(text)        
+        self.tts_strategy.synthesize(text)        

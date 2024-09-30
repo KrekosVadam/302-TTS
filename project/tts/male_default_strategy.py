@@ -1,10 +1,8 @@
-from collections.abc import Iterable
 from piper.voice import PiperVoice
-
-from .tts_strategy import TTSStrategy
-
 import numpy as np
 import sounddevice as sd
+
+from .tts_strategy import TTSStrategy
 
 class MaleDefaultStrategy(TTSStrategy):
     """
@@ -17,7 +15,7 @@ class MaleDefaultStrategy(TTSStrategy):
             for more specific implementations, such as generating male or female voices.
     """
     
-    def synthesize(self, text: str) -> Iterable[bytes]:
+    def synthesize(self, text: str):
         """
         Concrete method for generating default speech for the given text chunk.
 
@@ -28,6 +26,7 @@ class MaleDefaultStrategy(TTSStrategy):
         """
 
         voice = PiperVoice.load("project/voices/en_US-ryan-high.onnx")
+        print(sd.query_devices())
         stream = sd.OutputStream(device=0, samplerate=voice.config.sample_rate, channels=1, dtype='int16')
         stream.start()
 
@@ -37,8 +36,5 @@ class MaleDefaultStrategy(TTSStrategy):
 
         stream.stop()
         stream.close()
-        
-        if audio is None:
-            raise ValueError("Audio synthesis returned None.")
 
-        return audio
+        return
