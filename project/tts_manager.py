@@ -45,57 +45,10 @@ class TTSManager:
             # set default if nothing else chosen
             self.tts_strategy = MaleDefaultStrategy()
             
-
-        # model inference occurs. (TTS) based on voice type given
+        self.tts_strategy.synthesize(text)  
+        
         audio = self.tts_strategy.synthesize(text)
-            
-        # Play audio through onboard device
-        self.play_audio(audio, 0.5) 
-    
-    # Thread creation for playing audio
-    def play_audio(self, audio, delay):
-        """"
-        Creates a thread for audio playback
-
-        Args:
-            audio (): Audio processed by the TTS model readly for playback
-            delay (int): an int used to add artificial delay
-
-        Returns:
-            none
-        """
-
-        thread = threading.Thread(target=self._play_audio_thread, args=(audio, delay))
-        thread.start()
-
-    # Audio logic for playing on onboard sound system
-    def _play_audio_thread(self, audio, delay):
-        """"
-        Plays audio on onboard sound system. 
-
-        Args:
-            audio (): Audio processed by the TTS model readly for playback
-            delay (int): an int used to add artificial delay
-
-        Returns:
-            none
-        """
-
-        # Normalize the audio
-        audio_normalized = np.int16(audio / np.max(np.abs(audio)) * 32767)
-        
-        # Convert the audio to bytes
-        audio_bytes = audio_normalized.tobytes()
-        
-        # Play the audio using simpleaudio
-        play_obj = sa.play_buffer(audio_bytes, 1, 2, 22050)  # Mono, 16-bit PCM, 24kHz sample rate
-        
-        # Wait for playback to finish
-        play_obj.wait_done()
-
-        # Add a delay
-        time.sleep(delay)
-
+           
 def test_constructor():
     """
     Test that the constructor initializes the tts_strategy to None.
