@@ -24,5 +24,10 @@ class MaleDefaultStrategy(TTSStrategy):
         return: iterable of bytes representing the audio
         """
 
-        voice = PiperVoice.load("en_US-ryan-high")
-        return voice.synthesize_stream_raw(text)
+        voice = PiperVoice.load("project/voices/en_US-ryan-high.onnx")
+        audio_stream = voice.synthesize_stream_raw(text)
+        
+        if audio_stream is None:
+            raise ValueError("Audio synthesis returned None.")
+
+        return audio_stream

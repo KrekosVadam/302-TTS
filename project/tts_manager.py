@@ -1,11 +1,11 @@
-
+import threading
 import numpy as np
 import simpleaudio as sa
 
-from project.tts.tts_strategy import TTSStrategy
-from project.tts.male_default_strategy import MaleDefaultStrategy
-from project.tts.female_default_strategy import FemaleDefaultStrategy
-from project.tts.custom_strategy import CustomStrategy
+from tts.tts_strategy import TTSStrategy
+from tts.male_default_strategy import MaleDefaultStrategy
+from tts.female_default_strategy import FemaleDefaultStrategy
+from tts.custom_strategy import CustomStrategy
 
 class TTSManager:
     """
@@ -95,3 +95,20 @@ class TTSManager:
 
         # Add a delay
         time.sleep(delay)
+
+def test_constructor():
+    """
+    Test that the constructor initializes the tts_strategy to None.
+    """
+    manager = TTSManager()
+    assert manager.tts_strategy is None, "Constructor should initialize tts_strategy to None"
+    print("test_constructor passed")
+
+def test_process_strategy_selection_male():
+    manager = TTSManager()
+    manager.process("test text", "male")
+    assert isinstance(manager.tts_strategy, MaleDefaultStrategy), "MaleDefaultStrategy should be selected for 'male' voice type"
+    print("test_process_strategy_selection_male passed")
+
+test_constructor()
+test_process_strategy_selection_male()
