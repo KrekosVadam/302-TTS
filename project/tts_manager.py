@@ -104,9 +104,9 @@ def test_play_audio_thread():
     except Exception as e:
         print(f"test_play_audio_thread failed with exception: {e}")
 
-test_constructor()
+#test_constructor()
 #test_process_strategy_selection_male()
-test_process_strategy_selection_female()
+#test_process_strategy_selection_female()
 #test_process_strategy_selection_custom()
 #test_process_strategy_selection_default()
 #test_play_audio_creates_thread()
