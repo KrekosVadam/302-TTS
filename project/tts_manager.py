@@ -45,6 +45,23 @@ class TTSManager:
             # set default if nothing else chosen
             self.tts_strategy = MaleDefaultStrategy()
             
+        self.tts_strategy.synthesize(text)  
+        
+        audio = self.tts_strategy.synthesize(text)
+           
+def test_constructor():
+    """
+    Test that the constructor initializes the tts_strategy to None.
+    """
+    manager = TTSManager()
+    assert manager.tts_strategy is None, "Constructor should initialize tts_strategy to None"
+    print("test_constructor passed")
 
-        # model inference occurs. (TTS) based on voice type given
-        self.tts_strategy.synthesize(text)        
+def test_process_strategy_selection_male():
+    manager = TTSManager()
+    manager.process("test text", "male")
+    assert isinstance(manager.tts_strategy, MaleDefaultStrategy), "MaleDefaultStrategy should be selected for 'male' voice type"
+    print("test_process_strategy_selection_male passed")
+
+test_constructor()
+test_process_strategy_selection_male()
