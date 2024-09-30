@@ -95,3 +95,13 @@ class TTSManager:
 
         # Add a delay
         time.sleep(delay)
+
+def test_constructor():
+    """
+    Test that the constructor initializes the tts_strategy to None.
+    """
+    manager = TTSManager()
+    assert manager.tts_strategy is None, "Constructor should initialize tts_strategy to None"
+    print("test_constructor passed")
+
+test_constructor()
