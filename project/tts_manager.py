@@ -104,4 +104,11 @@ def test_constructor():
     assert manager.tts_strategy is None, "Constructor should initialize tts_strategy to None"
     print("test_constructor passed")
 
+def test_process_strategy_selection_male():
+    manager = TTSManager()
+    manager.process("test text", "male")
+    assert isinstance(manager.tts_strategy, MaleDefaultStrategy), "MaleDefaultStrategy should be selected for 'male' voice type"
+    print("test_process_strategy_selection_male passed")
+
 test_constructor()
+test_process_strategy_selection_male()
