@@ -3,6 +3,9 @@ from piper.voice import PiperVoice
 
 from .tts_strategy import TTSStrategy
 
+import numpy as np
+import sounddevice as sd
+
 class MaleDefaultStrategy(TTSStrategy):
     """
     Default TTS Strategy class implementing the TTSStrategy interface. 
@@ -25,9 +28,17 @@ class MaleDefaultStrategy(TTSStrategy):
         """
 
         voice = PiperVoice.load("project/voices/en_US-ryan-high.onnx")
-        audio_stream = voice.synthesize_stream_raw(text)
+        stream = sd.OutputStream(device=0, samplerate=voice.config.sample_rate, channels=1, dtype='int16')
+        stream.start()
+
+        for audio_bytes in voice.synthesize_stream_raw(text):
+            int_data = np.frombuffer(audio_bytes, dtype=np.int16)
+            stream.write(int_data)
+
+        stream.stop()
+        stream.close()
         
-        if audio_stream is None:
+        if audio is None:
             raise ValueError("Audio synthesis returned None.")
 
-        return audio_stream
+        return audio

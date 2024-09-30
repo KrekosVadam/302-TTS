@@ -1,7 +1,13 @@
 from tts_manager import TTSManager
 
+import onnx
+
 def main():
     """Main function to select strategy and process text-to-speech."""
+    
+    onnx_model = onnx.load("project/voices/en_US-ryan-high.onnx")
+    onnx.checker.check_model(onnx_model)
+
 
     # Initialise
     tts_manager = TTSManager()
