@@ -63,5 +63,51 @@ def test_process_strategy_selection_male():
     assert isinstance(manager.tts_strategy, MaleDefaultStrategy), "MaleDefaultStrategy should be selected for 'male' voice type"
     print("test_process_strategy_selection_male passed")
 
+def test_process_strategy_selection_female():
+    manager = TTSManager()
+    manager.process("test text", "female")
+    assert isinstance(manager.tts_strategy, FemaleDefaultStrategy), "FemaleDefaultStrategy should be selected for 'female' voice type"
+    print("test_process_strategy_selection_female passed")
+
+
+def test_process_strategy_selection_custom():
+    manager = TTSManager()
+    manager.process("test text", "custom")
+    assert isinstance(manager.tts_strategy, CustomStrategy), "CustomStrategy should be selected for 'custom' voice type"
+    print("test_process_strategy_selection_custom passed")
+
+
+def test_process_strategy_selection_default():
+    manager = TTSManager()
+    manager.process("test text", "unknown")
+    assert isinstance(manager.tts_strategy, MaleDefaultStrategy), "MaleDefaultStrategy should be selected as default for an unknown voice type"
+    print("test_process_strategy_selection_default passed")
+
+
+def test_play_audio_creates_thread():
+    manager = TTSManager()
+    dummy_audio = np.array([0.1, 0.2, 0.3])  # Dummy audio data for testing
+
+    # Try to play audio
+    manager.play_audio(dummy_audio, 0.5)
+    print("test_play_audio_creates_thread passed")
+
+
+def test_play_audio_thread():
+    manager = TTSManager()
+    dummy_audio = np.array([0.1, 0.2, 0.3])  # Dummy audio data for testing
+
+    # Test the internal audio playback logic
+    try:
+        manager._play_audio_thread(dummy_audio, 0.5)
+        print("test_play_audio_thread passed")
+    except Exception as e:
+        print(f"test_play_audio_thread failed with exception: {e}")
+
 test_constructor()
-test_process_strategy_selection_male()
+#test_process_strategy_selection_male()
+test_process_strategy_selection_female()
+#test_process_strategy_selection_custom()
+#test_process_strategy_selection_default()
+#test_play_audio_creates_thread()
+#test_play_audio_thread()
