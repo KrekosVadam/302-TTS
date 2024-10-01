@@ -8,3 +8,5 @@ TO RUN DOCKER CONTAINER:
 2. Enter following commands:
     docker build -t tts-app .  
     docker run --rm -it tts-app
+3. For audio on windows use:
+    wsl docker run --rm -it -e "PULSE_SERVER=/mnt/wslg/PulseServer" -v /mnt/wslg/:/mnt/wslg/ tts-app
