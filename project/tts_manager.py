@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import threading
 import numpy as np
 import simpleaudio as sa
@@ -224,4 +223,3 @@ def test_play_audio_thread():
 #test_process_strategy_selection_default()
 #test_play_audio_creates_thread()
 #test_play_audio_thread()
->>>>>>> 8c4da84ed4c8f95313d7e4211f481afb86f30e41
