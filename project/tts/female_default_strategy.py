@@ -42,6 +42,12 @@ except Exception as e:
 # 2. Test Voice Model Loading
 voice = PiperVoice.load("project/voices/en_US-lessac-high.onnx")
 assert voice is not None, "Voice model should load successfully"
-print("Test 1: Voice Model Loading - Passed")
+print("Test 2: Voice Model Loading - Passed")
+
+# 3. Test Audio Stream Configuration
+print(sd.query_devices())  # Printing available audio devices
+stream = sd.OutputStream(device=0, samplerate=22050, channels=1, dtype='int16')
+assert stream is not None, "Audio stream should initialize successfully"
+print("Test 3: Audio Stream Configuration - Passed")
 
 
