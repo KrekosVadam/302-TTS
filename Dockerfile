@@ -19,6 +19,6 @@ RUN apt-get update && apt-get install -y \
 
 COPY . .
 
-CMD ["python", "project/main.py"]
-# CMD ["python", "project/tts_manager.py"]
+#CMD ["python", "project/main.py"]
+CMD ["python", "project/tts/male_default_strategy.py"]
 
