@@ -45,11 +45,7 @@ voice = PiperVoice.load("project/voices/en_US-lessac-high.onnx")
 assert voice is not None, "Voice model should load successfully"
 print("Test 2: Voice Model Loading - Passed")
 
-# 3. Test Stream Start and Stop
-stream.start()
-assert stream.active, "Stream should be started"
-stream.stop()
-assert not stream.active, "Stream should be stopped"
-print("Test 3: Stream Start and Stop - Passed")
-
-
+# 3. Test Successful Audio Synthesis
+audio_stream = strategy.synthesize("Hello, world!")
+assert isinstance(audio_stream, Iterable), "Failed: Successful Audio Synthesis Test"
+assert len(audio_stream) > 0, "Failed: Audio stream should not be empty"
