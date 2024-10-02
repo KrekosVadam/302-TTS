@@ -39,4 +39,9 @@ try:
 except Exception as e:
     print(f"Test 1: Initialization of MaleDefaultStrategy - Failed ({str(e)})")
 
+# 2. Test Voice Model Loading
+voice = PiperVoice.load("project/voices/en_US-lessac-high.onnx")
+assert voice is not None, "Voice model should load successfully"
+print("Test 1: Voice Model Loading - Passed")
+
 
