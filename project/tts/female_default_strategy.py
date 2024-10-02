@@ -1,6 +1,7 @@
 from collections.abc import Iterable
 from piper.voice import PiperVoice
 from project.tts.tts_strategy import TTSStrategy
+import sounddevice as sd
 
 class FemaleDefaultStrategy(TTSStrategy):
     """
