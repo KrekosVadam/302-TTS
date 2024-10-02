@@ -58,11 +58,18 @@ audio_chunk_empty = next(audio_stream_empty)  # Get the first chunk of audio
 assert audio_chunk_empty is not None, "Failed: Audio data should be generated for empty string"
 print("Test 4: Audio Synthesis with Empty String - Passed")
 
-# 6. Test Audio Synthesis Returning None
+# Mock the PiperVoice instance and method
+voice = PiperVoice.load("project/voices/en_US-lessac-high.onnx")
 voice.synthesize_stream_raw = lambda text: None  # Simulate synthesize_stream_raw returning None
+
+# Create an instance of the strategy
+strategy = FemaleDefaultStrategy()
+
+# 5. Test Audio Synthesis Returning None
 try:
     strategy.synthesize("Hello")
     assert False, "Failed: Expected ValueError when synthesize_stream_raw returns None"
 except ValueError as e:
     assert str(e) == "Audio synthesis returned None.", "Failed: Error message mismatch"
-print("Test 6: Audio Synthesis Returning None - Passed")
+
+print("Test 5: Audio Synthesis Returning None - Passed")
