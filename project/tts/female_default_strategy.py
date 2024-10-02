@@ -50,3 +50,4 @@ audio_stream = strategy.synthesize("Hello, world!")
 assert isinstance(audio_stream, Iterable), "Failed: Successful Audio Synthesis Test"
 audio_chunk = next(audio_stream)  # Get the first chunk of audio
 assert audio_chunk is not None, "Failed: Audio stream should produce audio data"
+print("Test 3: Audio Synthesis - Passed")
