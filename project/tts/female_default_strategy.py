@@ -51,3 +51,11 @@ assert isinstance(audio_stream, Iterable), "Failed: Successful Audio Synthesis T
 audio_chunk = next(audio_stream)  # Get the first chunk of audio
 assert audio_chunk is not None, "Failed: Audio stream should produce audio data"
 print("Test 3: Audio Synthesis - Passed")
+
+# 4. Test Audio Synthesis with None Input
+try:
+    strategy.synthesize(None)
+    assert False, "Failed: Expected ValueError for None input"
+except ValueError as e:
+    assert str(e) == "Audio synthesis returned None.", "Failed: Error message mismatch"
+print("Test 4: Audio Synthesis with None Input - Passed")
