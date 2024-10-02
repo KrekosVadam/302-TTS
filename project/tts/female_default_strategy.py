@@ -30,3 +30,13 @@ class FemaleDefaultStrategy(TTSStrategy):
             raise ValueError("Audio synthesis returned None.")
 
         return audio_stream
+
+# 1. Test Initialization of MaleDefaultStrategy
+try:
+    strategy = FemaleDefaultStrategy()
+    assert strategy is not None, "MaleDefaultStrategy should initialize successfully"
+    print("Test 1: Initialization of MaleDefaultStrategy - Passed")
+except Exception as e:
+    print(f"Test 1: Initialization of MaleDefaultStrategy - Failed ({str(e)})")
+
+
