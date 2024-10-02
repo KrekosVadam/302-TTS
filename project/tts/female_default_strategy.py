@@ -48,4 +48,5 @@ print("Test 2: Voice Model Loading - Passed")
 # 3. Test Successful Audio Synthesis
 audio_stream = strategy.synthesize("Hello, world!")
 assert isinstance(audio_stream, Iterable), "Failed: Successful Audio Synthesis Test"
-assert len(audio_stream) > 0, "Failed: Audio stream should not be empty"
+audio_chunk = next(audio_stream)  # Get the first chunk of audio
+assert audio_chunk is not None, "Failed: Audio stream should produce audio data"
