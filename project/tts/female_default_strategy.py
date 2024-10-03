@@ -66,13 +66,19 @@ PiperVoice.load = lambda model_path: type(
     {"synthesize_stream_raw": lambda text: None}  # Simulate synthesize_stream_raw returning None
 )()
 
-# Now run the test for audio synthesis returning None
+# Mock PiperVoice.load by creating an inline object with a lambda function for synthesize_stream_raw
+PiperVoice.load = lambda model_path: type(
+    "MockedPiperVoice", 
+    (object,), 
+    {"synthesize_stream_raw": lambda text: None}  # Simulate synthesize_stream_raw returning None
+)()
+
+# Now test the behavior
 try:
-    # This will trigger the mocked synthesize_stream_raw to return None
-    audio_stream = strategy.synthesize("Hello")
+    strategy.synthesize("Hello")  # This should raise ValueError
     assert False, "Failed: Expected ValueError when synthesize_stream_raw returns None"
 except ValueError as e:
-    # Ensure the error message is the expected one
     assert str(e) == "Audio synthesis returned None.", "Failed: Error message mismatch"
 
-print("Test 5: Audio Synthesis Returning None - Passed")
+print("Test 6: Audio Synthesis Returning None - Passed")
+
