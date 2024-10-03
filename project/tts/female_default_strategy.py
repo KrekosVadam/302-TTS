@@ -68,7 +68,11 @@ except ValueError as e:
     assert str(e) == "Audio synthesis returned None.", "Failed: Error message mismatch"
 print("Test 5: Audio Synthesis Returning None - Passed")
 """
-
+# 8. Test Multiple Audio Chunks
+voice.synthesize_stream_raw = lambda text: [b'audio_chunk1', b'audio_chunk2']  # Simulate multiple chunks
+audio_stream_multiple = strategy.synthesize("This is a longer test.")
+assert isinstance(audio_stream_multiple, Iterable), "Failed: Multiple Audio Chunks Test"
+assert len(audio_stream_multiple) == 2, "Failed: Should return multiple audio chunks"
 # 6. Test Handling Invalid Text Input
 """
 try:
@@ -77,9 +81,3 @@ try:
 except TypeError:
     print("Test 6: Handling Invalid Text Input - Passed")
     """
-text = "This is a test"
-audio_stream = strategy.synthesize(text)
-
-# Print each chunk in the audio stream
-for chunk in audio_stream:
-    print(f"Audio chunk: {chunk}")
