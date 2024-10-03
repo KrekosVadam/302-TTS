@@ -70,7 +70,7 @@ PiperVoice.load = lambda model_path: type(
 PiperVoice.load = lambda model_path: type(
     "MockedPiperVoice", 
     (object,), 
-    {"synthesize_stream_raw": lambda text: None}  # Simulate synthesize_stream_raw returning None
+    {"synthesize_stream_raw": lambda self, text: None}  # Simulate synthesize_stream_raw returning None
 )()
 
 # Now test the behavior
