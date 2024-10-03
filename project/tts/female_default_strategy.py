@@ -1,7 +1,6 @@
 from collections.abc import Iterable
 from piper.voice import PiperVoice
 from project.tts.tts_strategy import TTSStrategy
-import sounddevice as sd
 
 class FemaleDefaultStrategy(TTSStrategy):
     """
@@ -26,7 +25,6 @@ class FemaleDefaultStrategy(TTSStrategy):
         
         voice = PiperVoice.load("project/voices/en_US-lessac-high.onnx")
         audio_stream = voice.synthesize_stream_raw(text)
-        print("Audio Stream:", audio_stream)
         
         if audio_stream is None:
             raise ValueError("Audio synthesis returned None.")
@@ -80,5 +78,11 @@ try:
 except ValueError as e:
     assert str(e) == "Audio synthesis returned None.", "Failed: Error message mismatch"
 
-print("Test 6: Audio Synthesis Returning None - Passed")
+print("Test 5: Audio Synthesis Returning None - Passed")
 
+# 6. Test Handling Invalid Text Input
+try:
+    strategy.synthesize(123)  # Passing an integer
+    assert False, "Failed: Expected TypeError for invalid input type"
+except TypeError:
+    print("Test 6: Handling Invalid Text Input - Passed")
