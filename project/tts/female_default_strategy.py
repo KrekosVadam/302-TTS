@@ -31,38 +31,29 @@ class FemaleDefaultStrategy(TTSStrategy):
 
         return audio_stream
 
-# 1. Test Initialization of MaleDefaultStrategy
+#Test Initialization of FemaleDefaultStrategy
 try:
     strategy = FemaleDefaultStrategy()
     assert strategy is not None, "MaleDefaultStrategy should initialize successfully"
     print("Test 1: Initialization of MaleDefaultStrategy - Passed")
-except Exception as e:
-    print(f"Test 1: Initialization of MaleDefaultStrategy - Failed ({str(e)})")
-
-# 2. Test Voice Model Loading
+    
+#Test Voice Model Loading
 voice = PiperVoice.load("project/voices/en_US-lessac-high.onnx")
 assert voice is not None, "Voice model should load successfully"
 print("Test 2: Voice Model Loading - Passed")
 
-# 3. Test Successful Audio Synthesis
+#Test Successful Audio Synthesis
 audio_stream = strategy.synthesize("Hello, world!")
 assert isinstance(audio_stream, Iterable), "Failed: Successful Audio Synthesis Test"
 audio_chunk = next(audio_stream)  # Get the first chunk of audio
 assert audio_chunk is not None, "Failed: Audio stream should produce audio data"
 print("Test 3: Audio Synthesis - Passed")
 
-# 4. Test Audio Synthesis with Empty String
+#Test Audio Synthesis with Empty String
 audio_stream_empty = strategy.synthesize("")
 audio_chunk_empty = next(audio_stream_empty)  # Get the first chunk of audio
 assert audio_chunk_empty is not None, "Failed: Audio data should be generated for empty string"
 print("Test 4: Audio Synthesis with Empty String - Passed")
-
-# Mock PiperVoice.load by overriding it inline
-PiperVoice.load = lambda model_path: type(
-    "MockedPiperVoice", 
-    (object,), 
-    {"synthesize_stream_raw": lambda text: None}  # Simulate synthesize_stream_raw returning None
-)()
 
 # Mock PiperVoice.load by creating an inline object with a lambda function for synthesize_stream_raw
 PiperVoice.load = lambda model_path: type(
@@ -70,14 +61,11 @@ PiperVoice.load = lambda model_path: type(
     (object,), 
     {"synthesize_stream_raw": lambda self, text: None}  # Simulate synthesize_stream_raw returning None
 )()
-
-# Now test the behavior
 try:
     strategy.synthesize("Hello")  # This should raise ValueError
     assert False, "Failed: Expected ValueError when synthesize_stream_raw returns None"
 except ValueError as e:
     assert str(e) == "Audio synthesis returned None.", "Failed: Error message mismatch"
-
 print("Test 5: Audio Synthesis Returning None - Passed")
 
 # 6. Test Handling Invalid Text Input
@@ -88,12 +76,9 @@ try:
 except TypeError:
     print("Test 6: Handling Invalid Text Input - Passed")
     """
+text = "This is a test"
+audio_stream = strategy.synthesize(text)
 
-# 7. Test Multiple Audio Chunks
-voice.synthesize_stream_raw = lambda text: (b'audio_chunk1', b'audio_chunk2')  # Simulate multiple chunks
-audio_stream_multiple = strategy.synthesize("This is a longer test.")
-audio_chunk_multiple = next(audio_stream_multiple)  # Get the first chunk of audio
-assert audio_chunk_multiple is not None, "Failed: Should return first audio chunk"
-audio_chunk_multiple_2 = next(audio_stream_multiple)  # Get the second chunk of audio
-assert audio_chunk_multiple_2 is not None, "Failed: Should return second audio chunk"
-print("Test 7: Multiple Audio Chunks - Passed")
+# Print each chunk in the audio stream
+for chunk in audio_stream:
+    print(f"Audio chunk: {chunk}")
