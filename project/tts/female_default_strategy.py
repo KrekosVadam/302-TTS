@@ -32,10 +32,9 @@ class FemaleDefaultStrategy(TTSStrategy):
         return audio_stream
 
 #Test Initialization of FemaleDefaultStrategy
-try:
-    strategy = FemaleDefaultStrategy()
-    assert strategy is not None, "MaleDefaultStrategy should initialize successfully"
-    print("Test 1: Initialization of MaleDefaultStrategy - Passed")
+strategy = FemaleDefaultStrategy()
+assert strategy is not None, "FemaleDefaultStrategy should initialize successfully"
+print("Test 1: Initialization of FemaleDefaultStrategy - Passed")
     
 #Test Voice Model Loading
 voice = PiperVoice.load("project/voices/en_US-lessac-high.onnx")
