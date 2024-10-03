@@ -31,6 +31,7 @@ class FemaleDefaultStrategy(TTSStrategy):
 
         return audio_stream
 
+#----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
 #Test Initialization of FemaleDefaultStrategy
 strategy = FemaleDefaultStrategy()
 assert strategy is not None, "FemaleDefaultStrategy should initialize successfully"
@@ -48,14 +49,16 @@ audio_chunk = next(audio_stream)  # Get the first chunk of audio
 assert audio_chunk is not None, "Failed: Audio stream should produce audio data"
 print("Test 3: Audio Synthesis - Passed")
 
+assert isinstance(audio_stream, Iterable), "Failed: audio_stream should be of type Iterable"
+print("Test 4: Audio Stream Type iterable - Passed")
+
 #Test Audio Synthesis with Empty String
 audio_stream_empty = strategy.synthesize("")
 audio_chunk_empty = next(audio_stream_empty)  # Get the first chunk of audio
 assert audio_chunk_empty is not None, "Failed: Audio data should be generated for empty string"
-print("Test 4: Audio Synthesis with Empty String - Passed")
+print("Test 5: Audio Synthesis with Empty String - Passed")
 
 # Mock PiperVoice.load by creating an inline object with a lambda function for synthesize_stream_raw
-"""
 PiperVoice.load = lambda model_path: type(
     "MockedPiperVoice", 
     (object,), 
@@ -66,18 +69,11 @@ try:
     assert False, "Failed: Expected ValueError when synthesize_stream_raw returns None"
 except ValueError as e:
     assert str(e) == "Audio synthesis returned None.", "Failed: Error message mismatch"
-print("Test 5: Audio Synthesis Returning None - Passed")
-"""
-# 8. Test Multiple Audio Chunks
-voice.synthesize_stream_raw = lambda text: [b'audio_chunk1', b'audio_chunk2']  # Simulate multiple chunks
-audio_stream_multiple = strategy.synthesize("This is a longer test.")
-assert isinstance(audio_stream_multiple, Iterable), "Failed: Multiple Audio Chunks Test"
-assert len(audio_stream_multiple) == 2, "Failed: Should return multiple audio chunks"
-# 6. Test Handling Invalid Text Input
-"""
+print("Test 6: Audio Synthesis Returning None - Passed")
+
 try:
     strategy.synthesize(123)  # Passing an integer
     assert False, "Failed: Expected TypeError for invalid input type"
 except TypeError:
-    print("Test 6: Handling Invalid Text Input - Passed")
-    """
+    print("Test 7: Handling Invalid Text Input - Passed")
+#----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
