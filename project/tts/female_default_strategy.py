@@ -59,11 +59,13 @@ audio_chunk_empty = next(audio_stream_empty)  # Get the first chunk of audio
 assert audio_chunk_empty is not None, "Failed: Audio data should be generated for empty string"
 print("Test 4: Audio Synthesis with Empty String - Passed")
 
-# Mock PiperVoice.load to return a mocked voice instance
-mocked_voice = PiperVoice()  # Create a mocked instance of PiperVoice
-mocked_voice.synthesize_stream_raw = lambda text: None  # Simulate synthesize_stream_raw returning None
+# Mock PiperVoice.load to return a mocked voice instance with synthesize_stream_raw returning None
+class MockedPiperVoice:
+    def synthesize_stream_raw(self, text):
+        return None  # Simulate synthesize_stream_raw returning None
 
-PiperVoice.load = lambda model_path: mocked_voice  # Override the load method to return the mocked voice
+# Override the load method to return the mocked voice instance
+PiperVoice.load = lambda model_path: MockedPiperVoice()
 
 # Now test the behavior
 try:
@@ -73,4 +75,5 @@ except ValueError as e:
     assert str(e) == "Audio synthesis returned None.", "Failed: Error message mismatch"
 
 print("Test 6: Audio Synthesis Returning None - Passed")
+
 
