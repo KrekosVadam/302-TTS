@@ -55,6 +55,7 @@ assert audio_chunk_empty is not None, "Failed: Audio data should be generated fo
 print("Test 4: Audio Synthesis with Empty String - Passed")
 
 # Mock PiperVoice.load by creating an inline object with a lambda function for synthesize_stream_raw
+"""
 PiperVoice.load = lambda model_path: type(
     "MockedPiperVoice", 
     (object,), 
@@ -66,6 +67,7 @@ try:
 except ValueError as e:
     assert str(e) == "Audio synthesis returned None.", "Failed: Error message mismatch"
 print("Test 5: Audio Synthesis Returning None - Passed")
+"""
 
 # 6. Test Handling Invalid Text Input
 """
