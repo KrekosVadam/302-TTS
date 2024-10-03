@@ -86,3 +86,12 @@ try:
     assert False, "Failed: Expected TypeError for invalid input type"
 except TypeError:
     print("Test 6: Handling Invalid Text Input - Passed")
+
+# 8. Test Multiple Audio Chunks
+voice.synthesize_stream_raw = lambda text: (b'audio_chunk1', b'audio_chunk2')  # Simulate multiple chunks
+audio_stream_multiple = strategy.synthesize("This is a longer test.")
+audio_chunk_multiple = next(audio_stream_multiple)  # Get the first chunk of audio
+assert audio_chunk_multiple is not None, "Failed: Should return first audio chunk"
+audio_chunk_multiple_2 = next(audio_stream_multiple)  # Get the second chunk of audio
+assert audio_chunk_multiple_2 is not None, "Failed: Should return second audio chunk"
+print("Test 8: Multiple Audio Chunks - Passed")
