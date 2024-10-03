@@ -26,6 +26,7 @@ class FemaleDefaultStrategy(TTSStrategy):
         
         voice = PiperVoice.load("project/voices/en_US-lessac-high.onnx")
         audio_stream = voice.synthesize_stream_raw(text)
+        print("Audio Stream:", audio_stream)
         
         if audio_stream is None:
             raise ValueError("Audio synthesis returned None.")
