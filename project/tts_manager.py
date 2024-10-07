@@ -59,17 +59,16 @@ try:
     results.append("Test 1 Passed: TTSManager is initialized correctly.")
 except AssertionError:
     results.append("Test 1 Failed: TTSManager should initialize tts_strategy to None.")
-"""
+
 # Test 2: Male Voice
-"""
+
 manager.process("Hello, this is a test.", "male")
 try:
     assert isinstance(manager.tts_strategy, MaleDefaultStrategy)
     results.append("Test 2 Passed: Should use MaleDefaultStrategy")
 except AssertionError:
     results.append("Test 2 Failed: Should use MaleDefaultStrategy")
-"""
-"""
+
 # Test 3: Female Voice
 manager = TTSManager()
 manager.process("Hello, this is a test.", "female")
@@ -78,9 +77,9 @@ try:
     results.append("Test 3 Passed: Should use FemaleDefaultStrategy")
 except AssertionError:
     results.append("Test 3 Failed: Should use FemaleDefaultStrategy")
-"""
+    
 # Test 4: Custom Voice
-"""
+
 manager = TTSManager()
 manager.process("Hello, this is a test.", "custom")
 try:
@@ -97,8 +96,7 @@ try:
     results.append("Test 5 Passed: Should default to MaleDefaultStrategy")
 except AssertionError:
     results.append("Test 5 Failed: Should default to MaleDefaultStrategy")
-"""
-"""
+
 # Test 6: Process with Empty String
 manager = TTSManager()
 try:
@@ -116,9 +114,9 @@ try:
     results.append("Test 7 Passed: Processed with None as text without errors.")
 except Exception:
     results.append("Test 7 Failed: Processing with None should not raise an error.")
-"""
+
 # Test 8: Process with Valid Text but No Voice Type
-"""
+
 manager = TTSManager()
 manager.process("Hello, this is a test.", "")  # Passing empty voice type
 try:
@@ -126,8 +124,8 @@ try:
     results.append("Test 8 Passed: Should default to MaleDefaultStrategy when voice type is empty.")
 except AssertionError:
     results.append("Test 8 Failed: Should default to MaleDefaultStrategy when voice type is empty.")
-"""
-"""
+
+
 # Test 9: Check if the audio is generated
 manager.process("Check synthesis", "female")  # Process with female voice
 try:
@@ -140,8 +138,6 @@ try:
 except Exception as e:
     results.append(f"Test 9 Failed: An error occurred - {str(e)}")
     
-"""
-"""
 # Test 10: Ensure Only One Strategy is Set
 manager = TTSManager()
 manager.process("First call", "male")
@@ -151,11 +147,9 @@ try:
     results.append("Test 10 Passed: Only one strategy should be set at a time.")
 except AssertionError:
     results.append("Test 10 Failed: There should only be one strategy set.")
-"""
- """   
+       
 # Print all test results
 for result in results:
-    print(result)
-    
+    print(result)    
 """
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
