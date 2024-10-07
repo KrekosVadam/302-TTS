@@ -43,5 +43,7 @@ class TTSManager:
             self.tts_strategy = CustomStrategy()
         else:
             # set default if nothing else chosen
-            self.tts_strategy = MaleDefaultStrategy()              
+            self.tts_strategy = MaleDefaultStrategy()
+            
+        self.tts_strategy.synthesize(text)  
         audio = self.tts_strategy.synthesize(text)  
