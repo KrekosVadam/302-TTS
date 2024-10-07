@@ -142,10 +142,10 @@ except Exception as e:
 
 # Test 10: Ensure Only One Strategy is Set
 manager = TTSManager()
-manager.process("First call", "female")
-manager.process("Second call", "male")  # Change strategy to male
+manager.process("First call", "male")
+manager.process("Second call", "female")  # Change strategy to male
 try:
-    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)  # Check the last strategy set
+    assert isinstance(manager.tts_strategy, FemaleDefaultStrategy)  # Check the last strategy set
     results.append("Test 10 Passed: Only one strategy should be set at a time.")
 except AssertionError:
     results.append("Test 10 Failed: There should only be one strategy set.")
