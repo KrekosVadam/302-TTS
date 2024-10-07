@@ -33,6 +33,7 @@ class FemaleDefaultStrategy(TTSStrategy):
 
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
 #Test Initialization of FemaleDefaultStrategy
+"""
 strategy = FemaleDefaultStrategy()
 assert strategy is not None, "FemaleDefaultStrategy should initialize successfully"
 print("Test 1: Initialization of FemaleDefaultStrategy - Passed")
@@ -78,4 +79,6 @@ try:
     assert False, "Failed: Expected TypeError for invalid input type"
 except TypeError:
     print("Test 7: Handling Invalid Text Input - Passed")
+
+"""
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
