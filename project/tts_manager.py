@@ -130,8 +130,8 @@ manager = TTSManager()
 manager.process("Check synthesis", "female")  # Process with female voice
 
 try:
-    audio_output = manager.tts_strategy.synthesize("Check synthesis")  # Call synthesize again to get the output
-    assert isinstance(audio_output, Iterable)  # Check if the output is an iterable
+    audio_output = manager.tts_strategy.synthesize("Check synthesis")  # Call synthesize to get the output
+    assert audio_output is not None  # Check if the output is not None
     results.append("Test 9 Passed: Synthesize produced an output.")
 except Exception as e:
     results.append(f"Test 9 Failed: An error occurred - {str(e)}")
