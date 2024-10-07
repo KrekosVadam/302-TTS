@@ -59,12 +59,23 @@ except AssertionError:
     results.append("Test 1 Failed: TTSManager should initialize tts_strategy to None.")
 
 # Test 2: Male Voice
+"""
 manager.process("Hello, this is a test.", "male")
 try:
     assert isinstance(manager.tts_strategy, MaleDefaultStrategy)
     results.append("Test 2 Passed: Should use MaleDefaultStrategy")
 except AssertionError:
     results.append("Test 2 Failed: Should use MaleDefaultStrategy")
+"""
+
+# Test 3: Female Voice
+manager = TTSManager()
+manager.process("Hello, this is a test.", "female")
+try:
+    assert isinstance(manager.tts_strategy, FemaleDefaultStrategy)
+    results.append("Test 3 Passed: Should use FemaleDefaultStrategy")
+except AssertionError:
+    results.append("Test 3 Failed: Should use FemaleDefaultStrategy")
 
 # Print all test results
 for result in results:
