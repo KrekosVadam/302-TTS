@@ -30,6 +30,7 @@ if __name__ == "__main__":
     main()
 #-------------------
 #Test1
+tts_manager = TTSManager()
 samples1 = ['Hey, I just ']
 outputs1 = []
 expected_outputs1 = [
