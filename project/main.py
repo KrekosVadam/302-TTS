@@ -1,4 +1,4 @@
-from tts_manager import TTSManager
+from project.tts_manager import TTSManager
 
 import onnx
 
