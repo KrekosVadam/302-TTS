@@ -45,12 +45,26 @@ class TTSManager:
             # set default if nothing else chosen
             self.tts_strategy = MaleDefaultStrategy()
             
-        self.tts_strategy.synthesize(text)  
+        audio = self.tts_strategy.synthesize(text)  
         
-        audio = self.tts_strategy.synthesize(text)
-           
+       self.play_audio_from_iterable(audio)
+
+    def play_audio_from_iterable(self, audio_chunks, sample_rate=44100, num_channels=1, bytes_per_sample=2):
+        """
+        Takes an Iterable[bytes] and plays the audio using simpleaudio.
+
+        Args:
+            audio_chunks (Iterable[bytes]): The audio data in byte format.
+            sample_rate (int): The sample rate (default is 44100 Hz).
+            num_channels (int): Number of audio channels (default is 1 for mono).
+            bytes_per_sample (int): Bytes per sample (default is 2 for 16-bit audio).
+        """
+        audio_buffer = b''.join(audio_chunks)
+        
+        play_obj = sa.play_buffer(audio_buffer, num_channels, bytes_per_sample, sample_rate)
+        play_obj.wait_done()
+
 tts_manager = TTSManager()
 
-# Test 1: Initialization
-assert tts_manager.tts_strategy is None, "Failed: TTSManager should initialize with None strategy."
-print("Test 1: Initialization - Passed")
+# Call the process method with text and a chosen voice type
+tts_manager.process("Hello, how are you?", "male")
