@@ -106,6 +106,15 @@ try:
 except Exception:
     results.append("Test 6 Failed: Processing with an empty string should not raise an error.")
 
+# Test 7: Process with None Text
+manager = TTSManager()
+try:
+    manager.process(None, "female")  # Testing with None as text
+    assert True  # Assuming the method should not raise an error
+    results.append("Test 7 Passed: Processed with None as text without errors.")
+except Exception:
+    results.append("Test 7 Failed: Processing with None should not raise an error.")
+
 # Print all test results
 for result in results:
     print(result)
