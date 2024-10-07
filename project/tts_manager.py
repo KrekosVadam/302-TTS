@@ -48,6 +48,8 @@ class TTSManager:
         self.tts_strategy.synthesize(text)  
         audio = self.tts_strategy.synthesize(text)  
 
+#----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
+
 results = []
 
 # Test 1: Initialization of TTSManager
@@ -125,25 +127,31 @@ try:
 except AssertionError:
     results.append("Test 8 Failed: Should default to MaleDefaultStrategy when voice type is empty.")
 """
-manager = TTSManager()
-manager.process("Check synthesis", "female")  # Process with female voice
 
+# Test 9: Check if the audio is generated
+manager.process("Check synthesis", "female")  # Process with female voice
 try:
     audio_output = manager.tts_strategy.synthesize("Check synthesis")  # Call synthesize to get the output
-    assert audio_output is not None  # Check if the output is not None
-    
+    assert audio_output is not None  # Check if the output is not None  
     # Check if audio_output is a generator and consume it
-    audio_data = list(audio_output)  # Convert generator to a list to consume it
-    
+    audio_data = list(audio_output)  # Convert generator to a list to consume it  
     assert len(audio_data) > 0  # Ensure that the generator yields some audio data
-
     results.append(f"Test 9 Passed: Synthesize produced an output. Type of audio output: {type(audio_output)}. Number of audio chunks: {len(audio_data)}.")
 except Exception as e:
     results.append(f"Test 9 Failed: An error occurred - {str(e)}")
 
+# Test 10: Ensure Only One Strategy is Set
+manager = TTSManager()
+manager.process("First call", "female")
+manager.process("Second call", "male")  # Change strategy to male
+try:
+    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)  # Check the last strategy set
+    results.append("Test 10 Passed: Only one strategy should be set at a time.")
+except AssertionError:
+    results.append("Test 10 Failed: There should only be one strategy set.")
     
 # Print all test results
 for result in results:
     print(result)
-
+#----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
 
