@@ -21,7 +21,7 @@ def main():
     voice_type = 'female'
 
     # Process each text sample
-    for sample in sample:
+    for sample in samples:
         print(f"Processing sample: {sample}")
         tts_manager.process(sample, voice_type)
 
