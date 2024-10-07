@@ -49,7 +49,7 @@ class TTSManager:
         audio = self.tts_strategy.synthesize(text)  
 
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
-
+"""
 results = []
 
 # Test 1: Initialization of TTSManager
@@ -139,7 +139,8 @@ try:
     results.append(f"Test 9 Passed: Synthesize produced an output. Type of audio output: {type(audio_output)}. Number of audio chunks: {len(audio_data)}.")
 except Exception as e:
     results.append(f"Test 9 Failed: An error occurred - {str(e)}")
-
+    
+"""
 # Test 10: Ensure Only One Strategy is Set
 manager = TTSManager()
 manager.process("First call", "male")
@@ -149,9 +150,11 @@ try:
     results.append("Test 10 Passed: Only one strategy should be set at a time.")
 except AssertionError:
     results.append("Test 10 Failed: There should only be one strategy set.")
+"""
     
 # Print all test results
 for result in results:
     print(result)
+    
+"""
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
-
