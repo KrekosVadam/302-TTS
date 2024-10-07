@@ -77,6 +77,35 @@ try:
 except AssertionError:
     results.append("Test 3 Failed: Should use FemaleDefaultStrategy")
 
+# Test 4: Custom Voice
+"""
+manager = TTSManager()
+manager.process("Hello, this is a test.", "custom")
+try:
+    assert isinstance(manager.tts_strategy, CustomStrategy)
+    results.append("Test 4 Passed: Should use CustomStrategy")
+except AssertionError:
+    results.append("Test 4 Failed: Should use CustomStrategy")
+
+# Test 5: Default Voice (unknown type)
+manager = TTSManager()
+manager.process("Hello, this is a test.", "unknown")
+try:
+    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)
+    results.append("Test 5 Passed: Should default to MaleDefaultStrategy")
+except AssertionError:
+    results.append("Test 5 Failed: Should default to MaleDefaultStrategy")
+"""
+
+# Test 6: Process with Empty String
+manager = TTSManager()
+try:
+    manager.process("", "female")  # Testing with an empty string
+    assert True  # Assuming the method should not raise an error
+    results.append("Test 6 Passed: Processed with empty string without errors.")
+except Exception:
+    results.append("Test 6 Failed: Processing with an empty string should not raise an error.")
+
 # Print all test results
 for result in results:
     print(result)
