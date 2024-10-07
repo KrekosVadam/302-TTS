@@ -1,4 +1,4 @@
-from tts_manager import TTSManager
+from project.tts_manager import TTSManager
 
 import onnx
 
@@ -18,7 +18,7 @@ def main():
 
     # Hard code voice type
     # Accepts male, female, custom, defaults to male
-    voice_type = 'male'
+    voice_type = 'female'
 
     # Process each text sample
     for sample in samples:
