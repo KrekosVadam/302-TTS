@@ -128,13 +128,15 @@ except AssertionError:
 # Test 9: Check if Synthesize Produces Output
 manager = TTSManager()
 manager.process("Check synthesis", "female")  # Process with female voice
-
 try:
     audio_output = manager.tts_strategy.synthesize("Check synthesis")  # Call synthesize to get the output
-    assert audio_output is not None  # Check if the output is not None
+    assert audio_output is not None  # Check if the output is not None    
+    # Print the type of audio output
+    print(f"Type of audio output: {type(audio_output)}")    
     results.append("Test 9 Passed: Synthesize produced an output.")
 except Exception as e:
     results.append(f"Test 9 Failed: An error occurred - {str(e)}")
+
     
 # Print all test results
 for result in results:
