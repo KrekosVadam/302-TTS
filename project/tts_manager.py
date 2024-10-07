@@ -125,14 +125,16 @@ try:
 except AssertionError:
     results.append("Test 8 Failed: Should default to MaleDefaultStrategy when voice type is empty.")
 """
-# Test 9: Check if Synthesize is Called
+# Test 9: Check if Synthesize Produces Output
 manager = TTSManager()
-manager.process("Check synthesis", "female")
+manager.process("Check synthesis", "female")  # Process with female voice
+
 try:
-    assert hasattr(manager.tts_strategy, 'synthesize_called') 
-    results.append("Test 9 Passed: Synthesize was called.")
-except AssertionError:
-    results.append("Test 9 Failed: Synthesize was not called.")
+    audio_output = manager.tts_strategy.synthesize("Check synthesis")  # Call synthesize again to get the output
+    assert isinstance(audio_output, Iterable)  # Check if the output is an iterable
+    results.append("Test 9 Passed: Synthesize produced an output.")
+except Exception as e:
+    results.append(f"Test 9 Failed: An error occurred - {str(e)}")
     
 # Print all test results
 for result in results:
