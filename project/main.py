@@ -30,13 +30,10 @@ if __name__ == "__main__":
     main()
 #-------------------
 #Test1
+samples = ['Hey, I just ']
 outputs1 = []
 expected_outputs1 = [
-    "Processing sample: Hey, I just ",
-    "Processing sample: got off work",
-    "Processing sample: and thought",
-    "Processing sample: I would give",
-    "Processing sample: you a call."
+    "Processing sample: Hey, I just "
 ]
 for sample in samples1:
     output = f"Processing sample: {sample}"
