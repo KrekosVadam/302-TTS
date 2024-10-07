@@ -132,10 +132,12 @@ try:
     audio_output = manager.tts_strategy.synthesize("Check synthesis")  # Call synthesize to get the output
     assert audio_output is not None  # Check if the output is not None
     
-    # Capture the type of audio output
-    audio_output_type = type(audio_output)
+    # Check if audio_output is a generator and consume it
+    audio_data = list(audio_output)  # Convert generator to a list to consume it
     
-    results.append(f"Test 9 Passed: Synthesize produced an output. Type of audio output: {audio_output_type}.")
+    assert len(audio_data) > 0  # Ensure that the generator yields some audio data
+
+    results.append(f"Test 9 Passed: Synthesize produced an output. Type of audio output: {type(audio_output)}. Number of audio chunks: {len(audio_data)}.")
 except Exception as e:
     results.append(f"Test 9 Failed: An error occurred - {str(e)}")
 
