@@ -115,6 +115,25 @@ try:
 except Exception:
     results.append("Test 7 Failed: Processing with None should not raise an error.")
 
+# Test 8: Process with Valid Text but No Voice Type
+"""
+manager = TTSManager()
+manager.process("Hello, this is a test.", "")  # Passing empty voice type
+try:
+    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)
+    results.append("Test 8 Passed: Should default to MaleDefaultStrategy when voice type is empty.")
+except AssertionError:
+    results.append("Test 8 Failed: Should default to MaleDefaultStrategy when voice type is empty.")
+"""
+# Test 9: Check if Synthesize is Called
+manager = TTSManager()
+manager.process("Check synthesis", "female")
+try:
+    assert hasattr(manager.tts_strategy, 'synthesize_called') 
+    results.append("Test 9 Passed: Synthesize was called.")
+except AssertionError:
+    results.append("Test 9 Failed: Synthesize was not called.")
+    
 # Print all test results
 for result in results:
     print(result)
