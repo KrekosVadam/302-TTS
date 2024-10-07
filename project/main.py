@@ -30,7 +30,7 @@ if __name__ == "__main__":
     main()
 #-------------------
 #Test1
-samples = ['Hey, I just ']
+samples1 = ['Hey, I just ']
 outputs1 = []
 expected_outputs1 = [
     "Processing sample: Hey, I just "
