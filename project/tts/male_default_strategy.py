@@ -19,22 +19,25 @@ class MaleDefaultStrategy(TTSStrategy):
         """
         Concrete method for generating default speech for the given text chunk.
 
-        param: text (str): A string representing the segment of text to be converted 
+        Args: text (str): A string representing the segment of text to be converted 
                             into speech.
 
-        return: iterable of bytes representing the audio
+        return: a list of bytes
         """
 
-        voice = PiperVoice.load("project/voices/en_US-ryan-high.onnx")
-        print(sd.query_devices())
-        stream = sd.OutputStream(device=0, samplerate=voice.config.sample_rate, channels=1, dtype='int16')
-        stream.start()
+        # Empty list
+        audio_data = []
 
+        # load voice model
+        # Ryan is a standard male voice
+        voice = PiperVoice.load("project/voices/en_US-jadon-voice+RT-medium.onnx")
+
+        # Loop through text and create voice then add to list
         for audio_bytes in voice.synthesize_stream_raw(text):
             int_data = np.frombuffer(audio_bytes, dtype=np.int16)
-            stream.write(int_data)
+            audio_data.append(int_data)
 
-        stream.stop()
-        stream.close()
+        # Join
+        np.concatenate(audio_data)
 
-        return
+        return audio_data

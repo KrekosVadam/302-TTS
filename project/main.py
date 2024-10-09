@@ -8,17 +8,18 @@ def main():
     # Initialise
     tts_manager = TTSManager()
 
-    # Hardcode text
+    # Hard code voice type
+    # Accepts male, female, custom, defaults to male
+    voice_type = 'male'
+
+    # Hardcode text as a list
     samples = [
         'Hey, I just ',
         'got off work',
         'and thought',
         'I would give',
-        'you a call.']
-
-    # Hard code voice type
-    # Accepts male, female, custom, defaults to male
-    voice_type = 'male'
+        'you a call.'
+    ]
 
     # Process each text sample
     for sample in samples:

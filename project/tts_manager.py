@@ -1,22 +1,24 @@
-
-import threading
 import numpy as np
-import simpleaudio as sa
 
 from tts.tts_strategy import TTSStrategy
 from tts.male_default_strategy import MaleDefaultStrategy
 from tts.female_default_strategy import FemaleDefaultStrategy
 from tts.custom_strategy import CustomStrategy
+from sound_stream.audio_player import AudioPlayer
 
 class TTSManager:
     """
     Acts as the context class responsible for managing the process of turning Text to Speech
 
-    param: tts_strategy (TTSStrategy): The strategy for generating audio from text.
+    methods
+        process(text: str, voice_type: str):
+            Handles passing the text to the respective voice model
+            Passes the returned list of bytes to the audio player
     """
     
-    def __init__(self):
-        self.tts_strategy = None
+    def __init__(self, tts_strategy=MaleDefaultStrategy):
+        self.tts_strategy = tts_strategy
+        self.audio_player = AudioPlayer()
      
     # Main process for creating text into speech and playing the speech
     def process(self, text: str, voice_type: str):
@@ -45,70 +47,12 @@ class TTSManager:
         else:
             # set default if nothing else chosen
             self.tts_strategy = MaleDefaultStrategy()
-            
-        self.tts_strategy.synthesize(text)  
-        
+
+        # Create audio
         audio = self.tts_strategy.synthesize(text)
-           
-def test_constructor():
-    """
-    Test that the constructor initializes the tts_strategy to None.
-    """
-    manager = TTSManager()
-    assert manager.tts_strategy is None, "Constructor should initialize tts_strategy to None"
-    print("test_constructor passed")
 
-def test_process_strategy_selection_male():
-    manager = TTSManager()
-    manager.process("test text", "male")
-    assert isinstance(manager.tts_strategy, MaleDefaultStrategy), "MaleDefaultStrategy should be selected for 'male' voice type"
-    print("test_process_strategy_selection_male passed")
+        # Convert the returned list to a numpy array
+        audio_array = np.array(audio, dtype=np.int16)
 
-def test_process_strategy_selection_female():
-    manager = TTSManager()
-    manager.process("test text", "female")
-    assert isinstance(manager.tts_strategy, FemaleDefaultStrategy), "FemaleDefaultStrategy should be selected for 'female' voice type"
-    print("test_process_strategy_selection_female passed")
-
-
-def test_process_strategy_selection_custom():
-    manager = TTSManager()
-    manager.process("test text", "custom")
-    assert isinstance(manager.tts_strategy, CustomStrategy), "CustomStrategy should be selected for 'custom' voice type"
-    print("test_process_strategy_selection_custom passed")
-
-
-def test_process_strategy_selection_default():
-    manager = TTSManager()
-    manager.process("test text", "unknown")
-    assert isinstance(manager.tts_strategy, MaleDefaultStrategy), "MaleDefaultStrategy should be selected as default for an unknown voice type"
-    print("test_process_strategy_selection_default passed")
-
-
-def test_play_audio_creates_thread():
-    manager = TTSManager()
-    dummy_audio = np.array([0.1, 0.2, 0.3])  # Dummy audio data for testing
-
-    # Try to play audio
-    manager.play_audio(dummy_audio, 0.5)
-    print("test_play_audio_creates_thread passed")
-
-
-def test_play_audio_thread():
-    manager = TTSManager()
-    dummy_audio = np.array([0.1, 0.2, 0.3])  # Dummy audio data for testing
-
-    # Test the internal audio playback logic
-    try:
-        manager._play_audio_thread(dummy_audio, 0.5)
-        print("test_play_audio_thread passed")
-    except Exception as e:
-        print(f"test_play_audio_thread failed with exception: {e}")
-
-#test_constructor()
-#test_process_strategy_selection_male()
-#test_process_strategy_selection_female()
-#test_process_strategy_selection_custom()
-#test_process_strategy_selection_default()
-#test_play_audio_creates_thread()
-#test_play_audio_thread()
+        # Play audio
+        self.audio_player.play_audio(audio_array)
