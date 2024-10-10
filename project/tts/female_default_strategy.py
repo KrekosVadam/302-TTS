@@ -1,12 +1,19 @@
 from piper.voice import PiperVoice
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9
 import numpy as np
 import sounddevice as sd
 
 from .tts_strategy import TTSStrategy
+<<<<<<< HEAD
 =======
 from project.tts.tts_strategy import TTSStrategy
 >>>>>>> c0478bedd220ed39c6ef7499399c6a2e8779a858
+=======
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9
 
 class FemaleDefaultStrategy(TTSStrategy):
     """
@@ -15,10 +22,11 @@ class FemaleDefaultStrategy(TTSStrategy):
 
     methods:
         synthesize(text: str):
-            Generate speech from a chunk of text.
+            Generate speech from a chunk of text. Can be overridden by subclasses 
+            for more specific implementations, such as generating male or female voices.
     """
     
-    def synthesize(self, text: str):
+def synthesize(self, text: str):
         """
         Concrete method for generating default speech for the given text chunk.
 
@@ -29,6 +37,9 @@ class FemaleDefaultStrategy(TTSStrategy):
         """
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9
         # Empty list
         audio_data = []
 
@@ -42,11 +53,19 @@ class FemaleDefaultStrategy(TTSStrategy):
             audio_data.append(int_data)
 
         # Join
+<<<<<<< HEAD
         np.concatenate(audio_data)
 
         return audio_data
 =======
         return audio_stream
+=======
+        # Concatenate all chunks in the list to form a single audio array
+        audio_array = np.concatenate(audio_data)
+
+        # return list
+        return audio_array
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9
 
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
 #Test Initialization of FemaleDefaultStrategy
@@ -99,4 +118,7 @@ except TypeError:
 
 """
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
+<<<<<<< HEAD
 >>>>>>> c0478bedd220ed39c6ef7499399c6a2e8779a858
+=======
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9

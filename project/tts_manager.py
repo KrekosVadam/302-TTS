@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import threading
 >>>>>>> c0478bedd220ed39c6ef7499399c6a2e8779a858
@@ -11,11 +12,19 @@ from tts.female_default_strategy import FemaleDefaultStrategy
 from tts.custom_strategy import CustomStrategy
 from sound_stream.audio_player import AudioPlayer
 =======
+=======
+import numpy as np
+
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9
 from project.tts.tts_strategy import TTSStrategy
 from project.tts.male_default_strategy import MaleDefaultStrategy
 from project.tts.female_default_strategy import FemaleDefaultStrategy
 from project.tts.custom_strategy import CustomStrategy
+<<<<<<< HEAD
 >>>>>>> c0478bedd220ed39c6ef7499399c6a2e8779a858
+=======
+from project.sound.audio_player import AudioPlayer
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9
 
 class TTSManager:
     """
@@ -59,6 +68,7 @@ class TTSManager:
             # set default if nothing else chosen
             self.tts_strategy = MaleDefaultStrategy()
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         # Create audio
         audio = self.tts_strategy.synthesize(text)
@@ -72,6 +82,16 @@ class TTSManager:
             
         self.tts_strategy.synthesize(text)  
         audio = self.tts_strategy.synthesize(text)  
+=======
+
+        # Create audio
+        audio_array = self.tts_strategy.synthesize(text)
+
+        # Play audio
+        self.audio_player.play_audio(audio_array)
+           
+
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9
 
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
 """
@@ -177,5 +197,9 @@ except AssertionError:
 for result in results:
     print(result)    
 """
+<<<<<<< HEAD
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
 >>>>>>> c0478bedd220ed39c6ef7499399c6a2e8779a858
+=======
+#----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9

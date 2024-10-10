@@ -19,6 +19,7 @@ def main():
         'and thought',
         'I would give',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'you a call.'
     ]
 =======
@@ -28,6 +29,10 @@ def main():
     # Accepts male, female, custom, defaults to male
     voice_type = 'female'
 >>>>>>> c0478bedd220ed39c6ef7499399c6a2e8779a858
+=======
+        'you a call.'
+    ]
+>>>>>>> 270d988f4d1d6741fc1172f7b75998eb6f8ea8e9
 
     # Process each text sample
     for sample in samples:
@@ -37,7 +42,11 @@ def main():
 # Ensure the script runs when executed directly
 if __name__ == "__main__":
     main()
+
+
+
 #-------------------
+"""
 #Test1
 tts_manager = TTSManager()
 samples1 = ['Hey, I just ']
@@ -106,3 +115,4 @@ try:
     print("Test 4 passed!")
 except AssertionError as e:
     print(f"Test 4 failed: {e}")
+"""
