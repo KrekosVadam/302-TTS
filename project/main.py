@@ -8,17 +8,18 @@ def main():
     # Initialise
     tts_manager = TTSManager()
 
-    # Hardcode text
+    # Hard code voice type
+    # Accepts male, female, custom, defaults to male
+    voice_type = 'male'
+
+    # Hardcode text as a list
     samples = [
         'Hey, I just ',
         'got off work',
         'and thought',
         'I would give',
-        'you a call.']
-
-    # Hard code voice type
-    # Accepts male, female, custom, defaults to male
-    voice_type = 'female'
+        'you a call.'
+    ]
 
     # Process each text sample
     for sample in samples:
@@ -28,7 +29,11 @@ def main():
 # Ensure the script runs when executed directly
 if __name__ == "__main__":
     main()
+
+
+
 #-------------------
+"""
 #Test1
 tts_manager = TTSManager()
 samples1 = ['Hey, I just ']
@@ -97,3 +102,4 @@ try:
     print("Test 4 passed!")
 except AssertionError as e:
     print(f"Test 4 failed: {e}")
+"""

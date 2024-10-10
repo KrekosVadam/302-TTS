@@ -1,21 +1,24 @@
-import threading
 import numpy as np
-import simpleaudio as sa
 
-from project.tts.tts_strategy import TTSStrategy
-from project.tts.male_default_strategy import MaleDefaultStrategy
-from project.tts.female_default_strategy import FemaleDefaultStrategy
-from project.tts.custom_strategy import CustomStrategy
+from tts.tts_strategy import TTSStrategy
+from tts.male_default_strategy import MaleDefaultStrategy
+from tts.female_default_strategy import FemaleDefaultStrategy
+from tts.custom_strategy import CustomStrategy
+from sound.audio_player import AudioPlayer
 
 class TTSManager:
     """
     Acts as the context class responsible for managing the process of turning Text to Speech
 
-    param: tts_strategy (TTSStrategy): The strategy for generating audio from text.
+    methods
+        process(text: str, voice_type: str):
+            Handles passing the text to the respective voice model
+            Passes the returned list of bytes to the audio player
     """
     
-    def __init__(self):
-        self.tts_strategy = None
+    def __init__(self, tts_strategy=MaleDefaultStrategy):
+        self.tts_strategy = tts_strategy
+        self.audio_player = AudioPlayer()
      
     # Main process for creating text into speech and playing the speech
     def process(self, text: str, voice_type: str):
@@ -44,9 +47,14 @@ class TTSManager:
         else:
             # set default if nothing else chosen
             self.tts_strategy = MaleDefaultStrategy()
-            
-        self.tts_strategy.synthesize(text)  
-        audio = self.tts_strategy.synthesize(text)  
+
+        # Create audio
+        audio_array = self.tts_strategy.synthesize(text)
+
+        # Play audio
+        self.audio_player.play_audio(audio_array)
+           
+
 
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
 """
