@@ -4,7 +4,7 @@ from tts.tts_strategy import TTSStrategy
 from tts.male_default_strategy import MaleDefaultStrategy
 from tts.female_default_strategy import FemaleDefaultStrategy
 from tts.custom_strategy import CustomStrategy
-from sound_stream.audio_player import AudioPlayer
+from sound.audio_player import AudioPlayer
 
 class TTSManager:
     """
@@ -49,10 +49,7 @@ class TTSManager:
             self.tts_strategy = MaleDefaultStrategy()
 
         # Create audio
-        audio = self.tts_strategy.synthesize(text)
-
-        # Convert the returned list to a numpy array
-        audio_array = np.array(audio, dtype=np.int16)
+        audio_array = self.tts_strategy.synthesize(text)
 
         # Play audio
         self.audio_player.play_audio(audio_array)

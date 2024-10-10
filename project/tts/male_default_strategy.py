@@ -30,7 +30,7 @@ class MaleDefaultStrategy(TTSStrategy):
 
         # load voice model
         # Ryan is a standard male voice
-        voice = PiperVoice.load("project/voices/en_US-jadon-voice+RT-medium.onnx")
+        voice = PiperVoice.load("project/voices/en_US-ryan-high.onnx")
 
         # Loop through text and create voice then add to list
         for audio_bytes in voice.synthesize_stream_raw(text):
@@ -38,6 +38,8 @@ class MaleDefaultStrategy(TTSStrategy):
             audio_data.append(int_data)
 
         # Join
-        np.concatenate(audio_data)
+        # Concatenate all chunks in the list to form a single audio array
+        audio_array = np.concatenate(audio_data)
 
-        return audio_data
+        # return list
+        return audio_array
