@@ -33,6 +33,19 @@ class AudioPlayer:
         stream.stop()
         stream.close()
 
+#--------------------------Start of Unit Testing-------------------------------------------
+player = AudioPlayer()
+# Test 1: Ensure the AudioPlayer object is initialized properly.
+try:
+    if player.play_thread is None and player.audio_data is None:
+        print("Test 1 Passed: AudioPlayer initialized successfully.")
+    else:
+        print("Test 1 Failed: AudioPlayer attributes not initialized correctly.")
+except Exception as e:
+    print(f"Test 1 Failed: An error occurred during initialization check - {e}")
+
+
+
 
 
     
