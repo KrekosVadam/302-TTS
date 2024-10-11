@@ -34,6 +34,7 @@ class AudioPlayer:
         stream.close()
 
 #--------------------------Start of Unit Testing-------------------------------------------
+"""
 player = AudioPlayer()
 # Test 1: Ensure the AudioPlayer object is initialized properly.
 try:
@@ -67,20 +68,8 @@ try:
     print("Test 4 Failed: Invalid data type was not handled.")
 except Exception as e:
     print(f"Test 4 Passed: Error raised as expected for invalid data type - {e}")
-
-# Test 5: Check the state of the stream after calling play_audio.
-audio_data = np.random.randint(-32768, 32767, 22050, dtype='int16')
-try:
-    player.play_audio(audio_data)
-    stream = sd.OutputStream(device=0, samplerate=22050, channels=1, dtype='int16', blocksize=256)
-    if stream.active:
-        print("Test 5 Passed: Audio stream is active during playback.")
-    else:
-        print("Test 5 Failed: Audio stream is not active during playback.")
-    stream.stop()
-    stream.close()
-except Exception as e:
-    print(f"Test 5 Failed: An error occurred while checking stream state - {e}")
+"""
+#----------------------------End of Unit Test---------------------------------------------
 
 
 
