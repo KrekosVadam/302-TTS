@@ -103,16 +103,15 @@ try:
     print("Test 5 Passed: process works with unknown voice type (defaults to male).")
 except Exception as e:
     print(f"Test 5 Failed: An error occurred with unknown voice type - {e}")
-"""
-# Test 6: Process with Empty String
-manager = TTSManager()
-try:
-    manager.process("", "female")  # Testing with an empty string
-    assert True  # Assuming the method should not raise an error
-    results.append("Test 6 Passed: Processed with empty string without errors.")
-except Exception:
-    results.append("Test 6 Failed: Processing with an empty string should not raise an error.")
 
+# Test 6: Test process with empty text
+try:
+    manager = TTSManager()
+    manager.process("", "male")  # Empty text should be handled gracefully
+    print("Test 6 Passed: process handles empty text without error.")
+except Exception as e:
+    print(f"Test 6 Failed: An error occurred with empty text - {e}")
+"""
 # Test 7: Process with None Text
 manager = TTSManager()
 try:
