@@ -65,3 +65,13 @@ try:
         print("Test 2 Failed: synthesize did not return a numpy array.")
 except Exception as e:
     print(f"Test 2 Failed: An error occurred during synthesize - {e}")
+
+# Test 3: Check if the length of the output is greater than 0 for valid input.
+try:
+    result = strategy.synthesize(text_input)
+    if len(result) > 0:
+        print("Test 3 Passed: synthesize output length is greater than 0.")
+    else:
+        print("Test 3 Failed: synthesize output length is 0.")
+except Exception as e:
+    print(f"Test 3 Failed: An error occurred during length check - {e}")
