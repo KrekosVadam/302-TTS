@@ -44,6 +44,14 @@ try:
 except Exception as e:
     print(f"Test 1 Failed: An error occurred during initialization check - {e}")
 
+# Test 2: Ensure the play_audio method can handle valid audio data.
+audio_data = np.random.randint(-32768, 32767, 22050, dtype='int16')
+try:
+    player.play_audio(audio_data)
+    print("Test 2 Passed: Audio plays successfully.")
+except Exception as e:
+    print(f"Test 2 Failed: An error occurred while playing audio - {e}")
+
 
 
 
