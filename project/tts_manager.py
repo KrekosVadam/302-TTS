@@ -16,10 +16,17 @@ class TTSManager:
             Passes the returned list of bytes to the audio player
     """
     
-    def __init__(self, tts_strategy=MaleDefaultStrategy):
-        self.tts_strategy = tts_strategy
+    #def __init__(self, tts_strategy=MaleDefaultStrategy):
+        #self.tts_strategy = tts_strategy
+        #self.audio_player = AudioPlayer()
+
+    def __init__(self, tts_strategy=None):
+        if tts_strategy is None:
+            self.tts_strategy = MaleDefaultStrategy()  
+        else:
+            self.tts_strategy = tts_strategy()
         self.audio_player = AudioPlayer()
-     
+    
     # Main process for creating text into speech and playing the speech
     def process(self, text: str, voice_type: str):
         """"
@@ -60,11 +67,12 @@ class TTSManager:
 # Test 1: Initialization of TTSManager
 try: 
     manager = TTSManager()
-    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)
+    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)  # Check if it's an instance
     print("Test 1 Passed: TTSManager is initialized correctly.")
 except AssertionError:
-    print(f"Test 1 Failed: TTSManager should initialize tts_strategy to MaleDefaultStrategy. "
-          f"Actual type: {type(manager.tts_strategy)}")
+    print("Test 1 Failed: TTSManager should initialize tts_strategy to MaleDefaultStrategy.")
+except Exception as e:
+    print(f"Test 1 Failed: An error occurred - {e}")
 """
 # Test 2: Male Voice
 
