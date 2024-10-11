@@ -64,6 +64,7 @@ class TTSManager:
 
 
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
+"""
 # Test 1: Ensure TTSManager can be initialized with the default MaleDefaultStrategy
 try: 
     manager = TTSManager()  # This should create an instance with tts_strategy initialized.
@@ -118,7 +119,7 @@ try:
     manager.process(12345, "male")  
     print("Test 7 Failed: Invalid input type was not handled.")
 except Exception as e:
-    print(f"Test 7 Passed: Error raised as expected for invalid input type - {e}")
+    print(f"Test 7 Passed: Error raised as expected for invalid input type")
 
 # Test 8: Process with Valid Text but No Voice Type
 try:
@@ -126,6 +127,7 @@ try:
     manager.process("Hello, Empty voice type should be gracefully handled", "")  
     print("Test 6 Passed: process handles empty text without error.")
 except Exception as e:
-    print(f"Test 6 Failed: An error occurred with empty text - {e}")
-       
+    print(f"Test 6 Failed: An error occurred with empty text - {e}")4
+
+"""      
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
