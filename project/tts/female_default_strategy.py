@@ -1,8 +1,5 @@
 from piper.voice import PiperVoice
-
 import numpy as np
-import sounddevice as sd
-
 from project.tts.tts_strategy import TTSStrategy
 
 class FemaleDefaultStrategy(TTSStrategy):
@@ -12,25 +9,23 @@ class FemaleDefaultStrategy(TTSStrategy):
 
     methods:
         synthesize(text: str):
-            Generate speech from a chunk of text. Can be overridden by subclasses 
-            for more specific implementations, such as generating male or female voices.
+            Generate speech from a chunk of text.
     """
     
-def synthesize(self, text: str):
+    def synthesize(self, text: str):
         """
         Concrete method for generating default speech for the given text chunk.
 
-        Args: text (str): A string representing the segment of text to be converted 
-                            into speech.
+        Args: 
+            text (str): A string representing the segment of text to be converted 
+                         into speech.
 
-        return: a list of bytes
+        return: a numpy array
         """
-
         # Empty list
         audio_data = []
 
-        # load voice model
-        # Ryan is a standard male voice
+        # Load voice model
         voice = PiperVoice.load("project/voices/en_US-lessac-high.onnx")
 
         # Loop through text and create voice then add to list
@@ -38,11 +33,10 @@ def synthesize(self, text: str):
             int_data = np.frombuffer(audio_bytes, dtype=np.int16)
             audio_data.append(int_data)
 
-        # Join
         # Concatenate all chunks in the list to form a single audio array
         audio_array = np.concatenate(audio_data)
 
-        # return list
+        # Return numpy array
         return audio_array
 
 # Initialize FemaleDefaultStrategy directly
