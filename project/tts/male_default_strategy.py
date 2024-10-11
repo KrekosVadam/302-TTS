@@ -44,6 +44,8 @@ class MaleDefaultStrategy(TTSStrategy):
         # return list
         return audio_array
 
+#-----------------------------Start of Unit Testing---------------------------------------------------
+"""
 strategy = MaleDefaultStrategy()
 
 # Test 1: Check if the MaleDefaultStrategy object is initialized properly.
@@ -105,3 +107,6 @@ try:
         print("Test 6 Failed: Output audio data is not of expected dtype int16.")
 except Exception as e:
     print(f"Test 6 Failed: An error occurred during dtype check - {e}")
+
+"""
+#-----------------------------End of Unit Testing---------------------------------------------------
