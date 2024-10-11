@@ -50,7 +50,7 @@ strategy = FemaleDefaultStrategy()
 
 # Test 1: Check if the FemaleDefaultStrategy object is initialized properly.
 try:
-    if isinstance(strategy, MaleDefaultStrategy):
+    if isinstance(strategy, FemaleDefaultStrategy):
         print("Test 1 Passed: FemaleDefaultStrategy initialized successfully.")
     else:
         print("Test 1 Failed: FemaleDefaultStrategy not initialized correctly.")
