@@ -75,3 +75,14 @@ try:
         print("Test 3 Failed: synthesize output length is 0.")
 except Exception as e:
     print(f"Test 3 Failed: An error occurred during length check - {e}")
+
+# Test 4: Check if the synthesize method can handle empty input without error.
+empty_text_input = ""
+try:
+    result = strategy.synthesize(empty_text_input)
+    if isinstance(result, np.ndarray):
+        print("Test 4 Passed: synthesize handles empty input without error.")
+    else:
+        print("Test 4 Failed: synthesize did not return a numpy array for empty input.")
+except Exception as e:
+    print(f"Test 4 Failed: An error occurred during empty input check - {e}")
