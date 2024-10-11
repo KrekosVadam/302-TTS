@@ -111,51 +111,21 @@ try:
     print("Test 6 Passed: process handles empty text without error.")
 except Exception as e:
     print(f"Test 6 Failed: An error occurred with empty text - {e}")
-"""
-# Test 7: Process with None Text
-manager = TTSManager()
+
+# Test 7: Test process with invalid text type (number instead of string)
 try:
-    manager.process(None, "female")  # Testing with None as text
-    assert True  # Assuming the method should not raise an error
-    results.append("Test 7 Passed: Processed with None as text without errors.")
-except Exception:
-    results.append("Test 7 Failed: Processing with None should not raise an error.")
+    manager = TTSManager()
+    manager.process(12345, "male")  
+    print("Test 7 Failed: Invalid input type was not handled.")
+except Exception as e:
+    print(f"Test 7 Passed: Error raised as expected for invalid input type - {e}")
 
 # Test 8: Process with Valid Text but No Voice Type
-
-manager = TTSManager()
-manager.process("Hello, this is a test.", "")  # Passing empty voice type
 try:
-    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)
-    results.append("Test 8 Passed: Should default to MaleDefaultStrategy when voice type is empty.")
-except AssertionError:
-    results.append("Test 8 Failed: Should default to MaleDefaultStrategy when voice type is empty.")
-
-
-# Test 9: Check if the audio is generated
-manager.process("Check synthesis", "female")  # Process with female voice
-try:
-    audio_output = manager.tts_strategy.synthesize("Check synthesis")  # Call synthesize to get the output
-    assert audio_output is not None  # Check if the output is not None  
-    # Check if audio_output is a generator and consume it
-    audio_data = list(audio_output)  # Convert generator to a list to consume it  
-    assert len(audio_data) > 0  # Ensure that the generator yields some audio data
-    results.append(f"Test 9 Passed: Synthesize produced an output. Type of audio output: {type(audio_output)}. Number of audio chunks: {len(audio_data)}.")
+    manager = TTSManager()
+    manager.process("Hello, Empty voice type should be gracefully handled", "")  
+    print("Test 6 Passed: process handles empty text without error.")
 except Exception as e:
-    results.append(f"Test 9 Failed: An error occurred - {str(e)}")
-    
-# Test 10: Ensure Only One Strategy is Set
-manager = TTSManager()
-manager.process("First call", "male")
-manager.process("Second call", "female")  # Change strategy to male
-try:
-    assert isinstance(manager.tts_strategy, FemaleDefaultStrategy)  # Check the last strategy set
-    results.append("Test 10 Passed: Only one strategy should be set at a time.")
-except AssertionError:
-    results.append("Test 10 Failed: There should only be one strategy set.")
+    print(f"Test 6 Failed: An error occurred with empty text - {e}")
        
-# Print all test results
-for result in results:
-    print(result)    
-"""
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
