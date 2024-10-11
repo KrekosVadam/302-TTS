@@ -64,22 +64,22 @@ class TTSManager:
 
 
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
+# Test 1: Ensure TTSManager can be initialized with the default MaleDefaultStrategy
 try: 
     manager = TTSManager()  # This should create an instance with tts_strategy initialized.
     assert isinstance(manager.tts_strategy, MaleDefaultStrategy)
     print("Test 1 Passed: TTSManager is initialized correctly.")
 except AssertionError:
     print("Test 1 Failed: TTSManager should initialize tts_strategy to MaleDefaultStrategy.")
-"""
-# Test 2: Male Voice
 
-manager.process("Hello, this is a test.", "male")
+# Test 2: Test process with male voice type
 try:
-    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)
-    results.append("Test 2 Passed: Should use MaleDefaultStrategy")
-except AssertionError:
-    results.append("Test 2 Failed: Should use MaleDefaultStrategy")
-
+    manager = TTSManager()
+    manager.process("Hello, this is a test.", "male")
+    print("Test 2 Passed: process works with male voice type.")
+except Exception as e:
+    print(f"Test 2 Failed: An error occurred with male voice type - {e}")
+"""
 # Test 3: Female Voice
 manager = TTSManager()
 manager.process("Hello, this is a test.", "female")
