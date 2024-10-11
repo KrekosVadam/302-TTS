@@ -86,3 +86,11 @@ try:
         print("Test 4 Failed: synthesize did not return a numpy array for empty input.")
 except Exception as e:
     print(f"Test 4 Failed: An error occurred during empty input check - {e}")
+
+# Test 5: Check if the synthesize method raises an error for non-string input.
+invalid_text_input = 12345  # Integer instead of string
+try:
+    result = strategy.synthesize(invalid_text_input)  # This should raise an error
+    print("Test 5 Failed: Invalid input type was not handled.")
+except Exception as e:
+    print(f"Test 5 Passed: Error raised as expected for invalid input type - {e}")
