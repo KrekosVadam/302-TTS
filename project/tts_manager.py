@@ -79,16 +79,15 @@ try:
     print("Test 2 Passed: process works with male voice type.")
 except Exception as e:
     print(f"Test 2 Failed: An error occurred with male voice type - {e}")
-"""
-# Test 3: Female Voice
-manager = TTSManager()
-manager.process("Hello, this is a test.", "female")
-try:
-    assert isinstance(manager.tts_strategy, FemaleDefaultStrategy)
-    results.append("Test 3 Passed: Should use FemaleDefaultStrategy")
-except AssertionError:
-    results.append("Test 3 Failed: Should use FemaleDefaultStrategy")
     
+# Test 3: Test process with female voice type
+try:
+    manager = TTSManager()
+    manager.process("Hello, this is a test.", "female")
+    print("Test 3 Passed: process works with female voice type.")
+except Exception as e:
+    print(f"Test 3 Failed: An error occurred with female voice type - {e}")
+"""  
 # Test 4: Custom Voice
 
 manager = TTSManager()
