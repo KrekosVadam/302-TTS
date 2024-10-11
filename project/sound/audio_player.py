@@ -60,6 +60,14 @@ try:
 except Exception as e:
     print(f"Test 3 Failed: An error occurred with empty audio data - {e}")
 
+# Test 4: Ensure play_audio raises an error for incorrect data type.
+invalid_audio_data = [1, 2, 3]  # List instead of numpy array
+try:
+    player.play_audio(invalid_audio_data)
+    print("Test 4 Failed: Invalid data type was not handled.")
+except Exception as e:
+    print(f"Test 4 Passed: Error raised as expected for invalid data type - {e}")
+
 
 
 
