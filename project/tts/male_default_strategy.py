@@ -2,7 +2,7 @@ from piper.voice import PiperVoice
 import numpy as np
 import sounddevice as sd
 
-from .tts_strategy import TTSStrategy
+from project.tts.tts_strategy import TTSStrategy
 
 class MaleDefaultStrategy(TTSStrategy):
     """
@@ -43,3 +43,14 @@ class MaleDefaultStrategy(TTSStrategy):
 
         # return list
         return audio_array
+
+strategy = MaleDefaultStrategy()
+
+# Test 1: Check if the MaleDefaultStrategy object is initialized properly.
+try:
+    if isinstance(strategy, MaleDefaultStrategy):
+        print("Test 1 Passed: MaleDefaultStrategy initialized successfully.")
+    else:
+        print("Test 1 Failed: MaleDefaultStrategy not initialized correctly.")
+except Exception as e:
+    print(f"Test 1 Failed: An error occurred during initialization check - {e}")
