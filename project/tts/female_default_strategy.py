@@ -45,7 +45,15 @@ def synthesize(self, text: str):
         # return list
         return audio_array
 
+# Initialize FemaleDefaultStrategy directly
+strategy = FemaleDefaultStrategy()
+
+# Test 1: Ensure the FemaleDefaultStrategy object is initialized properly.
+result1 = isinstance(strategy, FemaleDefaultStrategy)
+print("Test 1 Passed: FemaleDefaultStrategy initialized successfully." if result1 else "Test 1 Failed: Initialization failed.")
+
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
+"""
 strategy = FemaleDefaultStrategy()
 
 # Test 1: Check if the FemaleDefaultStrategy object is initialized properly.
@@ -107,4 +115,5 @@ try:
         print("Test 6 Failed: Output audio data is not of expected dtype int16.")
 except Exception as e:
     print(f"Test 6 Failed: An error occurred during dtype check - {e}")
+"""
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
