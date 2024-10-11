@@ -13,14 +13,8 @@ def main():
     voice_type = 'male'
 
     # Hardcode text as a list
-    samples = [
-        'Hey, I just ',
-        'got off work',
-        'and thought',
-        'I would give',
-        'you a call.'
-    ]
-    #samples = [Hey, I just got off work and thought I would give you a call.]
+    #samples = ['Hey, I just ','got off work','and thought','I would give','you a call.']
+    samples = [Hey, I just got off work and thought I would give you a call.]
 
     # Process each text sample
     for sample in samples:
