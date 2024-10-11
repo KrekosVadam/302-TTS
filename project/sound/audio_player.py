@@ -52,6 +52,14 @@ try:
 except Exception as e:
     print(f"Test 2 Failed: An error occurred while playing audio - {e}")
 
+# Test 3: Ensure play_audio can handle empty audio data.
+empty_audio_data = np.array([], dtype='int16')
+try:
+    player.play_audio(empty_audio_data)
+    print("Test 3 Passed: No error with empty audio data.")
+except Exception as e:
+    print(f"Test 3 Failed: An error occurred with empty audio data - {e}")
+
 
 
 
