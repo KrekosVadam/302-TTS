@@ -125,9 +125,9 @@ except Exception as e:
 try:
     manager = TTSManager()
     manager.process("Hello, Empty voice type should be gracefully handled", "")  
-    print("Test 6 Passed: process handles empty text without error.")
+    print("Test 8 Passed: process handles empty text without error.")
 except Exception as e:
-    print(f"Test 6 Failed: An error occurred with empty text - {e}")4
+    print(f"Test 8 Failed: An error occurred with empty text - {e}")4
 
 """      
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
