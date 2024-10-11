@@ -54,3 +54,14 @@ try:
         print("Test 1 Failed: MaleDefaultStrategy not initialized correctly.")
 except Exception as e:
     print(f"Test 1 Failed: An error occurred during initialization check - {e}")
+
+# Test 2: Check if the synthesize method returns a numpy array.
+text_input = "Hello, this is a test."
+try:
+    result = strategy.synthesize(text_input)
+    if isinstance(result, np.ndarray):
+        print("Test 2 Passed: synthesize returns a numpy array.")
+    else:
+        print("Test 2 Failed: synthesize did not return a numpy array.")
+except Exception as e:
+    print(f"Test 2 Failed: An error occurred during synthesize - {e}")
