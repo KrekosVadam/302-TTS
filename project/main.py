@@ -19,20 +19,11 @@ def main():
     for sample in samples:
         print(f"Processing sample: {sample}")
         
-        # Start time measurement
-        start_time = time.time()
-        
-        # Call the process method
-        tts_manager.process(sample, voice_type)
-        
-        # End time measurement
-        end_time = time.time()
-        
-        # Calculate inference time
-        inference_time = end_time - start_time
-        
+        start_time = time.time() # Start time measurement
+        tts_manager.process(sample, voice_type) # Call the process method
+        end_time = time.time()         # End time measurement
+        inference_time = end_time - start_time # Calculate inference time
         print(f"Inference time for sample: {inference_time:.4f} seconds")
-
-# Ensure the script runs when executed directly
+        
 if __name__ == "__main__":
     main()
