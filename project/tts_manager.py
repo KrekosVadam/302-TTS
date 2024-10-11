@@ -60,10 +60,11 @@ class TTSManager:
 # Test 1: Initialization of TTSManager
 try: 
     manager = TTSManager()
-    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)  
+    assert isinstance(manager.tts_strategy, MaleDefaultStrategy)
     print("Test 1 Passed: TTSManager is initialized correctly.")
 except AssertionError:
-    print("Test 1 Failed: TTSManager should initialize tts_strategy to MaleDefaultStrategy.")
+    print(f"Test 1 Failed: TTSManager should initialize tts_strategy to MaleDefaultStrategy. "
+          f"Actual type: {type(manager.tts_strategy)}")
 """
 # Test 2: Male Voice
 
