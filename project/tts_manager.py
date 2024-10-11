@@ -21,10 +21,7 @@ class TTSManager:
         #self.audio_player = AudioPlayer()
 
     def __init__(self, tts_strategy=None):
-        if tts_strategy is None:
-            self.tts_strategy = MaleDefaultStrategy()  
-        else:
-            self.tts_strategy = tts_strategy()
+        self.tts_strategy = MaleDefaultStrategy()
         self.audio_player = AudioPlayer()
     
     # Main process for creating text into speech and playing the speech
