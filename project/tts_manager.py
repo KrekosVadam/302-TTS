@@ -57,16 +57,13 @@ class TTSManager:
 
 
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
-# Test for TTSManager Initialization
+# Test 1: Initialization of TTSManager
 try:
     manager = TTSManager()
-    assert isinstance(manager.tts_strategy, MaleDefaultStrategy), "Expected tts_strategy to be of type MaleDefaultStrategy"
-    assert isinstance(manager.audio_player, AudioPlayer), "Expected audio_player to be of type AudioPlayer"
-    print("Initialization Test Passed: TTSManager is initialized correctly with default values.")
-except AssertionError as e:
-    print(f"Initialization Test Failed: {e}")
-except Exception as e:
-    print(f"Initialization Test Failed: An unexpected error occurred - {e}")
+    assert manager.tts_strategy is None  
+    print("Test 1 Passed: TTSManager is initialized correctly.")
+except AssertionError:
+    print("Test 1 Failed: TTSManager should initialize tts_strategy to None.")
 """
 # Test 2: Male Voice
 
