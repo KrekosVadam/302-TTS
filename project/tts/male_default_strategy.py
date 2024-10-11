@@ -93,4 +93,15 @@ try:
     result = strategy.synthesize(invalid_text_input)  # This should raise an error
     print("Test 5 Failed: Invalid input type was not handled.")
 except Exception as e:
-    print(f"Test 5 Passed: Error raised as expected for invalid input type - {e}")
+    print(f"Test 5 Passed: Error raised as expected for invalid input type")
+
+# Test 6: Check if the audio data generated is of the expected dtype.
+text_input = "Testing audio generation."
+try:
+    result = strategy.synthesize(text_input)
+    if result.dtype == np.int16:
+        print("Test 6 Passed: Output audio data is of expected dtype int16.")
+    else:
+        print("Test 6 Failed: Output audio data is not of expected dtype int16.")
+except Exception as e:
+    print(f"Test 6 Failed: An error occurred during dtype check - {e}")
