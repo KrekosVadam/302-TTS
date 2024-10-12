@@ -15,9 +15,11 @@ RUN apt-get update && apt-get install -y \
     libportaudiocpp0 \
     portaudio19-dev \
     pulseaudio \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade pip
+RUN pip install torch
+RUN pip install -r requirements.txt
 
 COPY . .
 

@@ -1,6 +1,6 @@
 from clone.tts_clone import TTSClone
 
-import onnx
+#import onnx
 
 def main():
     """Main function to select strategy and process text-to-speech."""
