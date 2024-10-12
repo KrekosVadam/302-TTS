@@ -7,7 +7,9 @@ WORKDIR /project
 COPY requirements.txt .
 
 RUN apt-get update && apt-get install -y \
-    build-essential \ 
+    python3-dev \
+    build-essential \
+    espeak-ng \ 
     libasound2-dev \
     libportaudio2 \
     libportaudiocpp0 \
@@ -19,6 +21,7 @@ RUN apt-get update && apt-get install -y \
 
 COPY . .
 
+CMD ["python", "./project/main.py"]
 #CMD ["python", "project/main.py"]
 #CMD ["python", "-m", "project.tts.female_default_strategy"]
-CMD ["python", "-m", "project.tts_manager"]
+#CMD ["python", "-m", "project.tts_manager"]

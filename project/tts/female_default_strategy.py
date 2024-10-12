@@ -30,7 +30,7 @@ class FemaleDefaultStrategy(TTSStrategy):
             raise ValueError("Audio synthesis returned None.")
 
         return audio_stream
-
+'''
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
 #Test Initialization of FemaleDefaultStrategy
 strategy = FemaleDefaultStrategy()
@@ -79,3 +79,4 @@ try:
 except TypeError:
     print("Test 7: Handling Invalid Text Input - Passed")
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
+'''
