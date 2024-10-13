@@ -4,8 +4,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /project
 
-COPY requirements.txt .
-
 RUN apt-get update && apt-get install -y \
     python3-dev \
     build-essential \
@@ -17,8 +15,10 @@ RUN apt-get update && apt-get install -y \
     pulseaudio \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip
-RUN pip install torch
+RUN pip install pip==24.0
+RUN pip install torch==1.13.0+cu117 --extra-index-url https://download.pytorch.org/whl/cu117
+
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY . .

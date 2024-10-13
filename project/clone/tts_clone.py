@@ -12,20 +12,19 @@ class TTSClone:
         # sample rate
         # resample
         
-        self.piper_repo = "https://github.com/rhasspy/piper.git"
-        
         self.dataset_path = "/project/project/voices/dataset"
-        self.transcript_file = "/project/project/voices/dataset/metadata.csv"
-        self.model_files_path = "/project/voices/training-resources"  # Local path to model file
-        self.config_files_path = "/project/voices/training-resources"  # Local path to config file
+        self.transcript_file = "./project/voices/dataset/metadata.csv"
+        self.model_files_path = "/project/project/voices/training-resources/epoch=4641-step=3104302.ckpt"  # Local path to model file
+        self.config_files_path = "/project/project/voices/training-resources"  # Local path to config file
         
         self.output_path = "/project/piper"
         self.output_dir = self.output_path+"/"+"test_model"
         
         # pretrained model paths
-        self.pretrained_model_path = "/project/voices/en_US-ryan-high.onnx"
-        self.pretrained_config_path = "/project/voices/en_US-ryan-high.onnx.json"
+        self.pretrained_model_path = "/project/project/voices/en_US-ryan-high.onnx"
+        self.pretrained_config_path = "/project/project/voices/en_US-ryan-high.onnx.json"
 
+        # Set up piper_train
         self.run_command("sh ./piper/src/python/build_monotonic_align.sh")
 
     def run_command(self, command):
@@ -84,7 +83,7 @@ class TTSClone:
             if os.path.exists(self.dataset_path+"/test_model.ckp"):
                 raise Exception("Oh no! You have already trained this model before, you cannot choose this option since your progress will be lost, and then your previous time will not count. Please select the option to continue a training.")
             else:
-                ft_command = '--resume_from_checkpoint "/content/pretrained.ckpt" '
+                ft_command = "--resume_from_checkpoint '{checkpoint_path}' ".format(checkpoint_path=self.model_files_path)
                 
         batch_size = 12
         validation_split = 0.01
@@ -95,8 +94,8 @@ class TTSClone:
         
         train_command = (
             "python -m piper_train " +
-            "--dataset-dir '{output_dir}' ".format(output_dir=self.output_dir) +
-            "--accelerator 'gpu' " +
+            "--dataset-dir '{output_path}' ".format(output_path=self.output_path) +
+            "--accelerator 'cpu' " +
             "--devices 1 " +
             "--batch-size {batch_size} ".format(batch_size=batch_size) +
             "--validation-split {validation_split} ".format(validation_split=validation_split) +
