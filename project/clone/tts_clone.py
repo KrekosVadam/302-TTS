@@ -19,6 +19,7 @@ class TTSClone:
         
         self.output_path = "/project/piper"
         self.output_dir = self.output_path+"/"+"test_model"
+        self.output_logs = self.output_path+"/"+"lightning_logs"
         
         # pretrained model paths
         self.pretrained_model_path = "/project/project/voices/en_US-ryan-high.onnx"
@@ -43,7 +44,13 @@ class TTSClone:
             raise FileNotFoundError(f"Metadata file not found: {self.transcript_file}")
     
         if not os.path.exists(self.output_path):
-            os.makedirs(self.output_path)        
+            os.makedirs(self.output_path) 
+
+        if not os.path.exists(self.output_logs):
+            os.makedirs(self.output_logs)
+
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)       
             
         os.chdir(os.path.join('piper', 'src', 'python'))
             
