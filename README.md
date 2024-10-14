@@ -11,4 +11,5 @@ TO RUN DOCKER CONTAINER:
 3. For audio on windows use:
     wsl docker run --rm -it -e "PULSE_SERVER=/mnt/wslg/PulseServer" -v /mnt/wslg/:/mnt/wslg/ tts-app
 4. For cloning:
-    docker run --shm-size=8g --rm -it tts-app
+    In the train command check accelerator is correct (cpu or gpu)
+    docker run --shm-size=16g --rm -it tts-app

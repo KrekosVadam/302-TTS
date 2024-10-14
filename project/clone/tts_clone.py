@@ -17,8 +17,7 @@ class TTSClone:
         self.model_files_path = "/project/project/voices/training-resources/epoch=4641-step=3104302.ckpt"  # Local path to model file
         self.config_files_path = "/project/project/voices/training-resources"  # Local path to config file
         
-        self.output_path = "/project/piper"
-        self.output_dir = self.output_path+"/"+"test_model"
+        self.output_path = "/project/voice_model"
         self.output_logs = self.output_path+"/"+"lightning_logs"
         
         # pretrained model paths
@@ -47,10 +46,7 @@ class TTSClone:
             os.makedirs(self.output_path) 
 
         if not os.path.exists(self.output_logs):
-            os.makedirs(self.output_logs)
-
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)       
+            os.makedirs(self.output_logs)    
             
         os.chdir(os.path.join('piper', 'src', 'python'))
             
@@ -92,7 +88,7 @@ class TTSClone:
             else:
                 ft_command = "--resume_from_checkpoint '{checkpoint_path}' ".format(checkpoint_path=self.model_files_path)
                 
-        batch_size = 12
+        batch_size = 4
         validation_split = 0.01
         quality = "medium"
         checkpoint_epochs = 5
