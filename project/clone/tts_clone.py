@@ -88,12 +88,12 @@ class TTSClone:
             else:
                 ft_command = "--resume_from_checkpoint '{checkpoint_path}' ".format(checkpoint_path=self.model_files_path)
                 
-        batch_size = 4
+        batch_size = 1
         validation_split = 0.01
         quality = "medium"
-        checkpoint_epochs = 5
-        log_every_n_steps = 1000
-        max_epochs = 10000
+        checkpoint_epochs = 1
+        log_every_n_steps = 1
+        max_epochs = 5000
         
         train_command = (
             "python -m piper_train " +
