@@ -1,8 +1,5 @@
-import threading
-import time
-import numpy as np
-import simpleaudio as sa
 import sounddevice as sd
+import numpy as np # For testing
 
 class AudioPlayer:
     """
@@ -10,11 +7,9 @@ class AudioPlayer:
 
     methods:
         play_audio(audio_data: numpy array):
-        _play_audio_thread():
     """
 
     def __init__(self):
-        self.play_thread = None
         self.audio_data = None
 
     def play_audio(self, audio_data):
@@ -25,12 +20,19 @@ class AudioPlayer:
             audio_data (numpy array): The audio data to play.
         """
 
+        # Define stream on default device
         stream = sd.OutputStream(device=0, samplerate=22050, channels=1, dtype='int16', blocksize=256)
+
+        # Start
         stream.start()
 
+        # Do playback
         stream.write(audio_data)
 
+        # Playback finished
         stream.stop()
+
+        # Close
         stream.close()
 
 #--------------------------Start of Unit Testing-------------------------------------------
@@ -70,9 +72,3 @@ except Exception as e:
     print(f"Test 4 Passed: Error raised as expected for invalid data type - {e}")
 """
 #----------------------------End of Unit Test---------------------------------------------
-
-
-
-
-
-    
