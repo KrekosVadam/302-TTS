@@ -1,7 +1,6 @@
-from piper.voice import PiperVoice
 import numpy as np
-import sounddevice as sd
 
+from piper.voice import PiperVoice
 from project.tts.tts_strategy import TTSStrategy
 
 class MaleDefaultStrategy(TTSStrategy):

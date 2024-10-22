@@ -1,6 +1,5 @@
-import numpy as np
+import numpy as np # For testing
 
-from project.tts.tts_strategy import TTSStrategy
 from project.tts.male_default_strategy import MaleDefaultStrategy
 from project.tts.female_default_strategy import FemaleDefaultStrategy
 from project.tts.custom_strategy import CustomStrategy
@@ -15,12 +14,8 @@ class TTSManager:
             Handles passing the text to the respective voice model
             Passes the returned list of bytes to the audio player
     """
-    
-    #def __init__(self, tts_strategy=MaleDefaultStrategy):
-        #self.tts_strategy = tts_strategy
-        #self.audio_player = AudioPlayer()
 
-    def __init__(self, tts_strategy=None):
+    def __init__(self):
         self.tts_strategy = MaleDefaultStrategy()
         self.audio_player = AudioPlayer()
     
@@ -87,12 +82,12 @@ except Exception as e:
     print(f"Test 3 Failed: An error occurred with female voice type - {e}") 
 
 # Test 4: Test process with custom voice type
-#try:
-    #manager = TTSManager()
-    #manager.process("Hello, this is a test.", "custom")
-    #print("Test 4 Passed: process works with custom voice type.")
-#except Exception as e:
-    #print(f"Test 4 Failed: An error occurred with custom voice type - {e}")
+try:
+    manager = TTSManager()
+    manager.process("Hello, this is a test.", "custom")
+    print("Test 4 Passed: process works with custom voice type.")
+except Exception as e:
+    print(f"Test 4 Failed: An error occurred with custom voice type - {e}")
 
 # Test 5: Test process with an unknown voice type (should default to MaleDefaultStrategy)
 try:

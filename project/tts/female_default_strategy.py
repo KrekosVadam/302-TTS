@@ -1,5 +1,6 @@
-from piper.voice import PiperVoice
 import numpy as np
+
+from piper.voice import PiperVoice
 from project.tts.tts_strategy import TTSStrategy
 
 class FemaleDefaultStrategy(TTSStrategy):
@@ -33,10 +34,11 @@ class FemaleDefaultStrategy(TTSStrategy):
             int_data = np.frombuffer(audio_bytes, dtype=np.int16)
             audio_data.append(int_data)
 
+        # Join
         # Concatenate all chunks in the list to form a single audio array
         audio_array = np.concatenate(audio_data)
 
-        # Return numpy array
+        # return list
         return audio_array
 
 #----------------------------------------START OF UNIT TESTING----------------------------------------------------------------------------------------
@@ -104,3 +106,4 @@ except Exception as e:
     print(f"Test 6 Failed: An error occurred during dtype check - {e}")
 """
 #----------------------------------------END OF UNIT TESTING----------------------------------------------------------------------------------------
+'''
