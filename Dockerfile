@@ -23,10 +23,10 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["python", "./project/main.py"]
+#CMD ["python", "./project/main.py"]
 #CMD ["python", "project/main.py"]
 #CMD ["python", "-m", "project.tts.female_default_strategy"]
 #CMD ["python", "-m", "project.tts.male_default_strategy"]
 ##CMD ["python", "-m", "project.tts_manager"]
 #CMD ["python", "-m", "project.sound.audio_player"]
-#CMD ["python", "-m", "project.main"]
+CMD ["python", "-m", "project.main"]
