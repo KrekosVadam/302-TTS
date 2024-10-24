@@ -1,7 +1,7 @@
 import numpy as np
 
 from piper.voice import PiperVoice
-from project.tts.tts_strategy import TTSStrategy
+from tts.tts_strategy import TTSStrategy
 
 class MaleDefaultStrategy(TTSStrategy):
     """

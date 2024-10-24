@@ -2,15 +2,7 @@
 cython
 librosa
 piper-tts
+sounddevice
 pytorch-lightning==1.7.7
 numpy==1.24
 torchmetrics==0.11.4
-
-
-
-torchtext
-torchvision
-torchaudio
-simpleaudio
-sounddevice
-onnx
