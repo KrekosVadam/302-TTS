@@ -20,7 +20,6 @@ def main():
     if action == '1':
         clone = TTSClone()
         clone.run()
-        a = input()
         voice_type = 'custom'
     elif action == '2':
         voice_type = 'male'
