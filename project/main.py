@@ -10,7 +10,12 @@ def main():
     tts_manager = TTSManager()
 
     print("Welcome to the Piper-TTS program, created by Murdoch Miles!")
-    print("Please select either [1] custom voice, [2] default male voice, or [3] default female voice.")
+    print("Please select from the following:")
+    
+    print("1. Train a voice")
+    print("2. Male Voice")
+    print("3. Female Voice")
+    print("4. Custom Voice")
 
     # Ask for user input and ensure it's either '1' or '2'
     #action = 0;
@@ -19,20 +24,21 @@ def main():
 
     if action == '1':
         clone = TTSClone()
-        clone.run()
-        voice_type = 'custom'
+        clone.run() 
     elif action == '2':
         voice_type = 'male'
     elif action == '3':
         voice_type = 'female'
-
-    # Hardcode text as a list
-    #samples = ['Hey, I just ','got off work','and thought','I would give','you a call.']
-    samples = ['Hey, I just got off work and thought I would give you a call.']
-
-    # Process each text sample
-    for sample in samples:
-        tts_manager.process(sample, voice_type) # Call the process method
+    elif action == '4':
+        voice_type = 'custom'
+        
+    while action in ('2', '3', '4'):
+        print("Enter text:")
+        sample = input().strip()
+        if sample.lower() == 'q':
+            break  # exit
+        else:
+            tts_manager.process(sample, voice_type) # call the process method
         
 if __name__ == "__main__":
     main()
