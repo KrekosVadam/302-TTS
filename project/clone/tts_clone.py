@@ -12,7 +12,7 @@ class TTSClone:
         # sample rate
         # resample
         
-        self.dataset_path = "/project/project/voices/dataset"
+        self.dataset_path = "/project/project/voices/jadon-voice-samples"
         self.model_files_path = "/project/project/voices/training-resources/epoch=4641-step=3104302.ckpt"  # Local path to model file
         
         self.output_path = "/project/voice_model"
