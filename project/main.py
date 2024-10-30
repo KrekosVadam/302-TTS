@@ -8,6 +8,10 @@ def main():
 
     # Initialise
     tts_manager = TTSManager()
+    clone = TTSClone()
+
+
+    # BELOW IS INCLUDED FOR DEMONSTRATION
 
     print("Welcome to the Piper-TTS program, created by Murdoch Miles!")
     print("Please select from the following:")
@@ -16,14 +20,11 @@ def main():
     print("2. Male Voice")
     print("3. Female Voice")
     print("4. Custom Voice")
+    print("q: Quit\n")
 
-    # Ask for user input and ensure it's either '1' or '2'
-    #action = 0;
-    #while action < 1 or action > 3:
-    action = input("Enter 1, 2, or 3: ").strip()
+    action = input("Enter 1, 2, 3, 4 or q: ").strip()
 
     if action == '1':
-        clone = TTSClone()
         clone.run() 
     elif action == '2':
         voice_type = 'male'
@@ -38,7 +39,7 @@ def main():
         if sample.lower() == 'q':
             break  # exit
         else:
-            tts_manager.process(sample, voice_type) # call the process method
+            tts_manager.process(sample, voice_type) # this is the main method used to synthesise speech from text
         
 if __name__ == "__main__":
     main()
