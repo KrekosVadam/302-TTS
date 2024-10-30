@@ -1,13 +1,26 @@
-# 302-TTS
-This is the project repo for ICT302 T2S-Kev.
-Strategy Design Pattern is utilised throughout the code for TTS and Streaming.
+# T2S-Kev (ICT302 Project by Murdoch Miles)
+A Text-to-Speech (TTS) application leveraging the Strategy Pattern Design to create natural TTS and Cloned Voices. 
 
-Check tts_clone.TTSClone.train to change batch sizes and max epochs
+## Prerequisites
 
-TO RUN DOCKER CONTAINER:
+1. **Docker**: Ensure docker is installed and running.
+2. **Model Checkpoint (.ckpt) Files**: If you are Cloning a voice, please follow the Clone script and user guide.
+       Download the checkpoint file from https://huggingface.co/datasets/rhasspy/piper-checkpoints/tree/main/en/en_US/ryan/medium and place it in project/voices/training-resources
+       Others can be found from the same website
+   
+## Setup and Installation
+
+1. **Clone Repository**
+2. **Build/Run Docker Image**
+
+## Build/Run Docker Image:
 
 1. Navigate to directory
-2. Download the checkpoint file from https://huggingface.co/datasets/rhasspy/piper-checkpoints/tree/main/en/en_US/ryan/medium and place it in project/voices/training-resources
-3. Enter following commands:
+2. Enter following commands:
+## For Windows:
     docker build -t tts-app .  
     wsl docker run --shm-size=16g --rm -it -e "PULSE_SERVER=/mnt/wslg/PulseServer" -v /mnt/wslg/:/mnt/wslg/ tts-app
+
+## For Linux:
+    docker build -t tts-app .  
+    wsl docker run --shm-size=16g --rm -it tts-app
