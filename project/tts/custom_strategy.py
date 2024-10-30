@@ -1,4 +1,7 @@
-from .tts_strategy import TTSStrategy
+import numpy as np
+
+from piper.voice import PiperVoice
+from tts.tts_strategy import TTSStrategy
 
 class CustomStrategy(TTSStrategy):
     """
@@ -21,6 +24,21 @@ class CustomStrategy(TTSStrategy):
         return: 
         """
         
-        # voice = "custom_voice"
-        
-        return 
+                # Empty list
+        audio_data = []
+
+        # load voice model
+        # Ryan is a standard male voice
+        voice = PiperVoice.load("project/voices/custom.onnx")
+
+        # Loop through text and create voice then add to list
+        for audio_bytes in voice.synthesize_stream_raw(text):
+            int_data = np.frombuffer(audio_bytes, dtype=np.int16)
+            audio_data.append(int_data)
+
+        # Join
+        # Concatenate all chunks in the list to form a single audio array
+        audio_array = np.concatenate(audio_data)
+
+        # return list
+        return audio_array

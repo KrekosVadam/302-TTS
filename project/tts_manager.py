@@ -1,9 +1,9 @@
-import numpy as np # For testing
+from sound.audio_player import AudioPlayer
 
-from project.tts.male_default_strategy import MaleDefaultStrategy
-from project.tts.female_default_strategy import FemaleDefaultStrategy
-from project.tts.custom_strategy import CustomStrategy
-from project.sound.audio_player import AudioPlayer
+from tts.male_default_strategy import MaleDefaultStrategy
+from tts.female_default_strategy import FemaleDefaultStrategy
+from tts.custom_strategy import CustomStrategy
+
 
 class TTSManager:
     """
