@@ -41,7 +41,7 @@ def main():
             print("\nEnter text to synthesize or 'x' to go back to the main menu and change the voice:")
             sample = input("Text: ").strip()
 
-            if sample.lower() == 'x:
+            if sample.lower() == 'x':
                 break  # return to the main menu
             else:
                 tts_manager.process(sample, voice_type)  # Synthesize speech
