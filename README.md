@@ -23,4 +23,4 @@ A Text-to-Speech (TTS) application leveraging the Strategy Pattern Design to cre
 
 ## For Linux:
     docker build -t tts-app .  
-    wsl docker run --shm-size=16g --rm -it tts-app
+    docker run --shm-size=16g --rm -it tts-app
