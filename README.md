@@ -5,8 +5,8 @@ A Text-to-Speech (TTS) application leveraging the Strategy Pattern Design to cre
 
 1. **Docker**: Ensure docker is installed and running.
 2. **Model Checkpoint (.ckpt) Files**: If you are Cloning a voice, please follow the Clone script and user guide.
-       Download the checkpoint file from https://huggingface.co/datasets/rhasspy/piper-checkpoints/tree/main/en/en_US/ryan/medium and place it in project/voices/training-resources
-       Others can be found from the same website
+       To train a male/female voice, download a the checkpoint (.ckpt) and config (.json) file from https://huggingface.co/datasets/rhasspy/piper-checkpoints/tree/main/ and be sure to place it in project/voices/training-resources
+       All models  can be found from the same website.
    
 ## Setup and Installation
 
