@@ -1,5 +1,6 @@
 from tts_manager import TTSManager 
 from clone.tts_clone import TTSClone
+from soundInput.soundRecord import SoundRecord
 
 #import onnx
 
@@ -7,16 +8,19 @@ def main():
     """Main function to select strategy and process text-to-speech."""
 
     # Initialise
-    tts_manager = TTSManager()
+    record = SoundRecord()
     clone = TTSClone()
+    tts_manager = TTSManager()
 
 
     # BELOW IS INCLUDED FOR DEMONSTRATION
 
+    print(" ") # Blank print line for formatting
+    print(" ")
     print("Welcome to the Piper-TTS program, created by Murdoch Miles!")
     print("Please select from the following:")
     
-    print("1. Train a voice")
+    print("1. Train a new voice")
     print("2. Male Voice")
     print("3. Female Voice")
     print("4. Custom Voice")
@@ -25,7 +29,8 @@ def main():
     action = input("Enter 1, 2, 3, 4 or q: ").strip()
 
     if action == '1':
-        clone.run() 
+        record.input_prompt()
+        #clone.run()  TODO uncommonent
     elif action == '2':
         voice_type = 'male'
     elif action == '3':

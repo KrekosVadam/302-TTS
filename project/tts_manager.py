@@ -1,4 +1,4 @@
-from sound.audio_player import AudioPlayer
+from soundOutput.audio_player import AudioPlayer
 
 from tts.male_default_strategy import MaleDefaultStrategy
 from tts.female_default_strategy import FemaleDefaultStrategy
